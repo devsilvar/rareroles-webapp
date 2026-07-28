@@ -1,0 +1,468 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * RareRoles design system — v4 (Brand Colors Edition)
+ * Brand Identity Colors:
+ * - Deep Purple / Dark Indigo: Primary, "Rare" text, geometric elements
+ * - Pink / Magenta: Bright accents, framing elements, CTAs
+ * - Muted Rose / Mauve: "Roles" text, secondary elements
+ * - White: Clean canvas, card backgrounds
+ */
+
+@theme inline {
+  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-rare: var(--rare);
+  --color-rare-foreground: var(--rare-foreground);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --shadow-soft: 0 1px 2px oklch(0.35 0.15 285 / 0.06), 0 8px 24px oklch(0.35 0.15 285 / 0.06);
+  --shadow-elevated:
+    0 2px 4px oklch(0.35 0.15 285 / 0.06), 0 24px 60px -18px oklch(0.35 0.15 285 / 0.18);
+  --shadow-inset-hairline: inset 0 0 0 1px oklch(1 0 0 / 0.6);
+  --shadow-glow-rare:
+    0 0 0 1px oklch(0.65 0.25 340 / 0.25), 0 20px 60px -10px oklch(0.65 0.25 340 / 0.35);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Brand Colors - RareRoles Identity */
+
+  /* Deep Purple / Dark Indigo - Primary brand color */
+  --brand-purple: oklch(0.35 0.15 285); /* Deep purple/indigo ~#3E1F8C */
+  --brand-purple-light: oklch(0.45 0.15 285); /* Lighter purple */
+  --brand-purple-dark: oklch(0.25 0.15 285); /* Darker purple */
+
+  /* Pink / Magenta - Accent & CTAs */
+  --brand-pink: oklch(0.65 0.25 340); /* Vibrant pink/magenta ~#E91E8C */
+  --brand-pink-light: oklch(0.75 0.2 340); /* Lighter pink */
+
+  /* Muted Rose / Mauve - Secondary accents */
+  --brand-mauve: oklch(0.6 0.12 340); /* Muted rose/mauve ~#B8799E */
+  --brand-mauve-light: oklch(0.7 0.1 340); /* Lighter mauve */
+
+  /* Canvas & Neutrals */
+  --background: oklch(0.99 0.005 285); /* Slight purple-tinted white */
+  --surface: oklch(1 0 0); /* Pure white */
+  --surface-elevated: oklch(1 0 0); /* Pure white */
+
+  /* Foreground - Deep Purple for primary text */
+  --foreground: var(--brand-purple);
+  --ink: var(--brand-purple);
+  --ink-muted: oklch(0.55 0.08 285); /* Muted purple-gray */
+
+  /* Card backgrounds */
+  --card: oklch(1 0 0); /* Pure white */
+  --card-foreground: var(--brand-purple);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--brand-purple);
+
+  /* Primary - Deep Purple */
+  --primary: var(--brand-purple);
+  --primary-foreground: oklch(0.99 0 0); /* White text on purple */
+
+  /* Secondary - Mauve */
+  --secondary: var(--brand-mauve-light);
+  --secondary-foreground: var(--brand-purple);
+
+  /* Muted - Soft purple-tinted gray */
+  --muted: oklch(0.96 0.01 285);
+  --muted-foreground: oklch(0.55 0.08 285);
+
+  /* Accent - Pink/Magenta for CTAs and highlights */
+  --accent: var(--brand-pink);
+  --accent-foreground: oklch(0.99 0 0); /* White text on pink */
+
+  /* Rare - Special brand highlight (Pink gradient to Purple) */
+  --rare: var(--brand-pink);
+  --rare-foreground: oklch(0.99 0 0);
+
+  /* Destructive - Keep functional */
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Borders - Subtle purple tint */
+  --border: oklch(0.92 0.01 285);
+  --border-strong: oklch(0.86 0.03 285);
+  --input: oklch(0.92 0.01 285);
+  --ring: var(--brand-pink); /* Pink focus ring */
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background-color: var(--color-background);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--accent-foreground);
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  max-width: 78rem;
+  @media (min-width: 768px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+@utility text-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+/* Brand-specific utilities */
+@utility text-brand-purple {
+  color: var(--brand-purple);
+}
+
+@utility text-brand-pink {
+  color: var(--brand-pink);
+}
+
+@utility text-brand-mauve {
+  color: var(--brand-mauve);
+}
+
+@utility bg-brand-purple {
+  background-color: var(--brand-purple);
+}
+
+@utility bg-brand-pink {
+  background-color: var(--brand-pink);
+}
+
+@utility bg-brand-mauve {
+  background-color: var(--brand-mauve);
+}
+
+@utility border-brand-purple {
+  border-color: var(--brand-purple);
+}
+
+@utility border-brand-pink {
+  border-color: var(--brand-pink);
+}
+
+@utility border-brand-mauve {
+  border-color: var(--brand-mauve);
+}
+
+/* Brand gradient - Pink to Purple */
+@utility bg-brand-gradient {
+  background: linear-gradient(135deg, var(--brand-pink) 0%, var(--brand-purple) 100%);
+}
+
+@utility text-brand-gradient {
+  background: linear-gradient(135deg, var(--brand-pink) 0%, var(--brand-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility hairline {
+  border-top: 1px solid var(--color-border);
+}
+
+@utility hairline-dashed {
+  border-top: 1px dashed var(--color-border-strong);
+}
+
+@utility surface-grain {
+  background-image: radial-gradient(oklch(0.21 0.03 265 / 0.04) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+@utility surface-grid {
+  background-image:
+    linear-gradient(to right, oklch(0.21 0.03 265 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.21 0.03 265 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+}
+
+@utility aurora {
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 20%, oklch(0.55 0.22 265 / 0.18), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 30%, oklch(0.7 0.16 220 / 0.14), transparent 70%);
+}
+
+@utility text-hero-serif {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee-x 40s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+@utility animate-dash {
+  animation: dash 20s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@utility animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1deg);
+  }
+}
+@utility animate-float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+@keyframes float-slower {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-1deg);
+  }
+}
+@utility animate-float-slower {
+  animation: float-slower 12s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+@utility animate-pulse-ring {
+  animation: pulse-ring 3s ease-out infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@utility animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@utility animate-spin-reverse {
+  animation: spin-reverse 6s linear infinite;
+}
+
+@keyframes shimmer-vertical {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+@utility animate-shimmer-vertical {
+  animation: shimmer-vertical 3s ease-in-out infinite;
+}
+
+@keyframes shimmer-rotate {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.3;
+  }
+}
+@utility animate-shimmer-rotate {
+  animation: shimmer-rotate 3s linear infinite;
+}
+
+@keyframes shimmer-horizontal {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+@utility animate-shimmer-horizontal {
+  animation: shimmer-horizontal 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@utility animate-shimmer {
+  animation: shimmer 2s ease-in-out;
+}
+
+@keyframes pulse-subtle {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@utility animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+@keyframes bounce-subtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+@utility animate-bounce-subtle {
+  animation: bounce-subtle 1.5s ease-in-out infinite;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(100%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-200%) scale(1);
+    opacity: 0;
+  }
+}
+@utility animate-float-particle {
+  animation: float-particle 4s ease-in-out infinite;
+}
+
+@utility shadow-glow {
+  box-shadow: 0 0 12px 2px currentColor;
+  filter: brightness(1.2);
+}
+
+/* Radial gradient utility for vignette effects */
+@utility bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Diagnostic</title>
+    <style>
+        body {
+            font-family: system-ui;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+            border: 2px solid #00ff00;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success { background: #0f5132; border: 1px solid #198754; }
+        .error { background: #842029; border: 1px solid #dc3545; }
+        .info { background: #084298; border: 1px solid #0d6efd; }
+    </style>
+</head>
+<body>
+    <h1>🎬 Video Diagnostic Page</h1>
+    
+    <div class="test">
+        <h2>Test 1: Can the video file be loaded?</h2>
+        <div id="file-check" class="status info">Checking...</div>
+    </div>
+
+    <div class="test">
+        <h2>Test 2: Video at 100% Opacity (Full Brightness)</h2>
+        <p>If you see video here, the file works!</p>
+        <video id="video1" autoplay loop muted playsinline controls>
+            <source src="/hero-video.mp4" type="video/mp4">
+        </video>
+        <div id="status1" class="status info">Loading...</div>
+    </div>
+
+    <div class="test">
+        <h2>Test 3: Video at 30% Opacity (Current Hero Setting)</h2>
+        <p>This matches your current hero section</p>
+        <div style="position: relative; width: 100%; max-width: 800px; height: 400px; background: #000; border: 2px solid #00ff00;">
+            <video id="video2" autoplay loop muted playsinline
+                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
+                <source src="/hero-video.mp4" type="video/mp4">
+            </video>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.7), rgba(0,0,0,0.8));"></div>
+            <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; height: 100%;">
+                <h1 style="color: white; font-size: 48px;">Your Hero Text</h1>
+            </div>
+        </div>
+        <div id="status2" class="status info">Loading...</div>
+    </div>
+
+    <div class="test">
+        <h2>Test 4: Video Info</h2>
+        <div id="video-info" class="status info">Loading...</div>
+    </div>
+
+    <div class="test">
+        <h2>Test 5: Network Check</h2>
+        <div id="network-check" class="status info">Checking...</div>
+        <p>Open DevTools (F12) → Network tab to see video request</p>
+    </div>
+
+    <script>
+        console.log('🎬 Video Diagnostic Starting...');
+
+        // Test 1: File existence
+        fetch('/hero-video.mp4', { method: 'HEAD' })
+            .then(response => {
+                const fileCheck = document.getElementById('file-check');
+                if (response.ok) {
+                    const size = response.headers.get('content-length');
+                    const sizeMB = (size / 1024 / 1024).toFixed(2);
+                    fileCheck.className = 'status success';
+                    fileCheck.innerHTML = `✅ Video file found! Size: ${sizeMB} MB`;
+                    console.log('✅ Video file exists:', sizeMB, 'MB');
+                } else {
+                    fileCheck.className = 'status error';
+                    fileCheck.innerHTML = `❌ Video file not found! (${response.status})`;
+                    console.error('❌ Video file not found');
+                }
+            })
+            .catch(err => {
+                document.getElementById('file-check').className = 'status error';
+                document.getElementById('file-check').innerHTML = `❌ Error checking file: ${err.message}`;
+                console.error('❌ Error:', err);
+            });
+
+        // Test 2 & 3: Video events
+        const videos = [
+            { element: document.getElementById('video1'), status: 'status1', name: 'Full opacity' },
+            { element: document.getElementById('video2'), status: 'status2', name: '30% opacity' }
+        ];
+
+        videos.forEach(({ element, status, name }) => {
+            const statusDiv = document.getElementById(status);
+            
+            element.addEventListener('loadstart', () => {
+                statusDiv.className = 'status info';
+                statusDiv.innerHTML = `⏳ ${name}: Loading started...`;
+                console.log(`⏳ ${name}: Load started`);
+            });
+
+            element.addEventListener('loadedmetadata', () => {
+                statusDiv.className = 'status info';
+                statusDiv.innerHTML = `⏳ ${name}: Metadata loaded (${element.duration.toFixed(1)}s duration)`;
+                console.log(`⏳ ${name}: Metadata loaded`);
+            });
+
+            element.addEventListener('loadeddata', () => {
+                statusDiv.className = 'status info';
+                statusDiv.innerHTML = `⏳ ${name}: Data loaded, ready to play`;
+                console.log(`⏳ ${name}: Data loaded`);
+            });
+
+            element.addEventListener('canplay', () => {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = `✅ ${name}: Ready to play!`;
+                console.log(`✅ ${name}: Can play`);
+            });
+
+            element.addEventListener('playing', () => {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = `✅ ${name}: PLAYING NOW! 🎉`;
+                console.log(`✅ ${name}: Playing`);
+            });
+
+            element.addEventListener('error', (e) => {
+                const error = element.error;
+                let errorMsg = 'Unknown error';
+                if (error) {
+                    switch(error.code) {
+                        case 1: errorMsg = 'MEDIA_ERR_ABORTED'; break;
+                        case 2: errorMsg = 'MEDIA_ERR_NETWORK'; break;
+                        case 3: errorMsg = 'MEDIA_ERR_DECODE'; break;
+                        case 4: errorMsg = 'MEDIA_ERR_SRC_NOT_SUPPORTED'; break;
+                    }
+                }
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `❌ ${name}: Error! ${errorMsg}`;
+                console.error(`❌ ${name}:`, errorMsg, error);
+            });
+        });
+
+        // Test 4: Video info
+        setTimeout(() => {
+            const video = document.getElementById('video1');
+            const infoDiv = document.getElementById('video-info');
+            
+            if (video.readyState >= 2) { // HAVE_CURRENT_DATA or higher
+                infoDiv.className = 'status success';
+                infoDiv.innerHTML = `
+                    ✅ Video Info:<br>
+                    - Duration: ${video.duration.toFixed(2)}s<br>
+                    - Dimensions: ${video.videoWidth}x${video.videoHeight}<br>
+                    - Ready State: ${video.readyState}<br>
+                    - Network State: ${video.networkState}<br>
+                    - Autoplay: ${video.autoplay}<br>
+                    - Muted: ${video.muted}<br>
+                    - Loop: ${video.loop}
+                `;
+            } else {
+                infoDiv.className = 'status error';
+                infoDiv.innerHTML = '❌ Video not ready yet. Refresh page.';
+            }
+        }, 2000);
+
+        // Test 5: Network
+        const networkCheck = document.getElementById('network-check');
+        networkCheck.innerHTML = `
+            ✅ Current URL: ${window.location.href}<br>
+            ✅ Video URL: ${window.location.origin}/hero-video.mp4<br>
+            Check Network tab (F12) to see if video is loading
+        `;
+    </script>
+</body>
+</html>

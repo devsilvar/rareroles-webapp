@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: #fff;
+            font-family: system-ui;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin: 20px auto;
+            border: 2px solid #333;
+        }
+        .info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .opacity-test {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 40px auto;
+            border: 2px solid #333;
+        }
+        .opacity-test video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            border: none;
+            margin: 0;
+        }
+        .opacity-test .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.9), rgba(0,0,0,0.95));
+        }
+        .opacity-test h1 {
+            position: relative;
+            z-index: 10;
+            font-size: 48px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Video Test Page</h1>
+        
+        <div class="info">
+            <h2>1. Full Opacity Video (100%)</h2>
+            <p>This should play at full brightness</p>
+        </div>
+        
+        <video autoplay loop muted playsinline controls>
+            <source src="/hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="info">
+            <h2>2. Low Opacity Video (15%) - As Used in Hero</h2>
+            <p>This matches your hero section implementation</p>
+        </div>
+        
+        <div class="opacity-test">
+            <video autoplay loop muted playsinline>
+                <source src="/hero-video.mp4" type="video/mp4">
+            </video>
+            <div class="overlay">
+                <h1>Your Heading Text</h1>
+            </div>
+        </div>
+        
+        <div class="info">
+            <h3>✅ Checklist:</h3>
+            <ul style="text-align: left; max-width: 600px; margin: 20px auto;">
+                <li>Video file size: ~2.4MB</li>
+                <li>Format: MP4</li>
+                <li>Location: /public/hero-video.mp4</li>
+                <li>Autoplay: Enabled</li>
+                <li>Loop: Enabled</li>
+                <li>Muted: Required for autoplay</li>
+            </ul>
+            
+            <h3>🔍 Troubleshooting:</h3>
+            <ul style="text-align: left; max-width: 600px; margin: 20px auto;">
+                <li>If video doesn't play, check browser console (F12)</li>
+                <li>Make sure dev server is running: <code>npm run dev</code></li>
+                <li>Try hard refresh: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)</li>
+                <li>Check video file is not corrupted (should play in VLC/media player)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Log video events for debugging
+        const videos = document.querySelectorAll('video');
+        videos.forEach((video, index) => {
+            video.addEventListener('loadstart', () => console.log(`Video ${index + 1}: Load started`));
+            video.addEventListener('loadeddata', () => console.log(`Video ${index + 1}: Data loaded ✅`));
+            video.addEventListener('canplay', () => console.log(`Video ${index + 1}: Can play ✅`));
+            video.addEventListener('playing', () => console.log(`Video ${index + 1}: Playing ✅`));
+            video.addEventListener('error', (e) => console.error(`Video ${index + 1}: ERROR`, e));
+        });
+        
+        // Check if video file exists
+        fetch('/hero-video.mp4')
+            .then(response => {
+                if (response.ok) {
+                    console.log('✅ Video file found at /hero-video.mp4');
+                    console.log('Video size:', (response.headers.get('content-length') / 1024 / 1024).toFixed(2), 'MB');
+                } else {
+                    console.error('❌ Video file not found!');
+                }
+            })
+            .catch(err => console.error('❌ Error checking video file:', err));
+    </script>
+</body>
+</html>

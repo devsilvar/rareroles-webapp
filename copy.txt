@@ -1,0 +1,239 @@
+RARE ROLES – WEBSITE DESIGN BRIEF
+
+HOME PAGE
+Hero Section:1
+Headline:
+Hire Rare Tech Talent Without Stress
+Subtext:
+We focus on what others struggle to fill:
+Rare roles
+Hard-to-fill positions
+Experienced niche talent.
+
+Buttons:
+Hire Talent
+
+Join Talent Network
+
+Section 2: The Problem
+Headline:
+Hiring rare tech roles is not easy
+Text:
+Some roles are hard to fill.
+Not because people are not hiring, but because the right talent is hard to find.
+These roles remain open for months, slowing business growth.
+That is where RareRoles comes in.
+
+Section 3: What We Do
+Headline:
+We don’t wait for roles — we prepare ahead
+Text:
+At RareRoles, we don’t start searching when you contact us.
+We already have access to pre-qualified talent in niche areas.
+This means you get:
+Faster hiring
+
+Better candidates
+
+Less stress
+
+Section:4 Roles We Cover
+Headline:
+Roles we specialize in
+List:
+Oracle PL/SQL Developers
+
+CCIE Network Engineers
+
+AIX System Administrators
+
+SharePoint Engineers
+
+AI / Machine Learning Engineers
+
+AI Automation Engineers
+
+Solution Architects
+
+Section:5 How It Works
+Headline:
+Simple process
+Steps:
+1. Tell us the role you want to fill
+2. We match you with the right talent
+3. You hire faster and easier
+
+Section: Call to Action
+Headline:
+Let’s help you fill your hardest roles
+Button:
+Get Started
+
+
+FOR COMPANIES PAGE
+Header
+Section: 1 Headline:
+Hire Rare Talent Faster
+Subtext:
+We help you fill hard-to-find roles without wasting time
+
+Section:2 Why RareRoles
+Headline:
+Why companies choose us
+Text:
+We focus only on rare and hard-to-fill roles.
+We understand where to find these professionals and how to engage them.
+
+Section:3 What You Get
+Headline:
+What you get
+List:
+Access to pre-vetted talent
+
+Faster time to hire
+
+Reduced hiring risk
+
+Support for critical roles
+
+Section: 4 Our Services
+1. Staffing:
+A.Contract Talent
+(Get skilled professionals quickly when you need them.
+Choose from flexible options—either hire from our network of contract experts or bring in full-time professionals that fit your needs.)
+Button:
+Book Consultation 
+
+B: Permanent Talent
+Hire the right people and grow faster.
+)Quickly find experienced professionals—from entry-level to senior leaders—to build a strong, long-term team.)
+Button:
+Book Consultation 
+
+Talent Pipeline Access
+We give you access to talent even before roles open
+
+C. Early Talent Solutions 
+
+Our Business Model
+Talk to our team to learn more
+
+Section 5: Industries We Serve
+Headline:
+Industries we support
+List:
+Banking
+
+Fintech
+
+Consulting (Big 4)
+
+Telecom
+
+Enterprise Tech
+
+Section:6 CTA
+Headline:
+Let’s help you hire better
+Button:
+Book a Call
+
+
+FOR TALENT PAGE
+Section: 1 Header
+Headline:
+Access Better Opportunities
+Subtext:
+Get connected to roles you won’t easily find online
+
+Section 2: Why Join RareRoles
+Headline:
+Why join us
+Text:
+We connect you to high-value and specialized roles.
+We work with companies looking for your exact skills.
+
+Section 3: What You Get
+Headline:
+What you get
+List:
+Access to exclusive job opportunities
+
+Visibility to top companies
+
+Career growth opportunities
+
+Section: 4 Join Network
+Headline:
+Join our talent network
+Text:
+Sign up and let us match you with the right opportunities
+Button:
+Join Now
+
+
+ABOUT PAGE
+Section:1 Who We Are
+Headline:
+Who we are
+Text:
+RareRoles is a talent company focused on rare and hard-to-fill tech roles.
+We help companies find the right talent, and we help professionals find better opportunities.
+
+Section: Mission
+Headline:
+Our mission
+Text:
+To help companies hire rare talent faster and help professionals grow in specialized careers
+
+Section:2 Vision
+Headline:
+Our vision
+Text:
+To become the go-to company for rare and emerging tech roles
+
+Section:3 Our Approach
+Headline:
+How we work
+Text:
+We build talent pipelines before companies need them.
+This helps companies hire faster and with less stress.
+
+
+CONTACT PAGE
+Header
+Headline:
+Contact Us
+
+Text:
+Have a role to fill or want to join our talent network?
+We would love to hear from you
+
+Form Fields:
+Name
+
+Email
+
+Company (optional)
+
+Message
+
+Button:
+Submit
+
+
+FOOTER (ALL PAGES)
+Text:
+RareRoles – Connecting companies to rare tech talent
+Links:
+Home
+
+For Companies
+
+For Talent
+
+About
+
+Contact
+
+End of Website Copy
