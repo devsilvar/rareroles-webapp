@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloudinary CV Download Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    h1 {
+      color: #1e1b4b;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+    
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 2px solid #e5e7eb;
+    }
+    
+    .section h2 {
+      color: #1e1b4b;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 10px;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #ec4899;
+    }
+    
+    button {
+      background: #ec4899;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    
+    button:hover {
+      background: #db2777;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .result {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    
+    .result.success {
+      background: #d1fae5;
+      border: 2px solid #10b981;
+      color: #065f46;
+    }
+    
+    .result.error {
+      background: #fee2e2;
+      border: 2px solid #ef4444;
+      color: #991b1b;
+    }
+    
+    .result.info {
+      background: #dbeafe;
+      border: 2px solid #3b82f6;
+      color: #1e40af;
+    }
+    
+    .result.warning {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      color: #92400e;
+    }
+    
+    .url-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .url-list li {
+      padding: 10px;
+      margin-bottom: 8px;
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .url-list li.testing {
+      border-color: #3b82f6;
+      background: #eff6ff;
+    }
+    
+    .url-list li.success {
+      border-color: #10b981;
+      background: #d1fae5;
+    }
+    
+    .url-list li.failed {
+      border-color: #ef4444;
+      background: #fee2e2;
+    }
+    
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .badge-testing {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .badge-success {
+      background: #10b981;
+      color: white;
+    }
+    
+    .badge-failed {
+      background: #ef4444;
+      color: white;
+    }
+    
+    code {
+      background: #1e1b4b;
+      color: #ec4899;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    
+    .info-box {
+      background: #eff6ff;
+      border: 2px solid #3b82f6;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .info-box strong {
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 Cloudinary CV Download Diagnostic Tool</h1>
+    <p class="subtitle">Test and fix CV download 401 errors</p>
+    
+    <div class="info-box">
+      <strong>💡 Quick Fix:</strong> If you're getting 401 errors, your Cloudinary upload preset is likely set to <code>authenticated</code> delivery. 
+      Change it to <code>public</code> in your Cloudinary dashboard → Settings → Upload Presets → Edit <code>sember_preset</code>.
+    </div>
+    
+    <div class="section">
+      <h2>1️⃣ Test CV URL</h2>
+      <p style="margin-bottom: 10px; color: #6b7280;">Paste a Cloudinary CV URL to test accessibility</p>
+      <input 
+        type="text" 
+        id="testUrl" 
+        placeholder="https://res.cloudinary.com/rkgr2tc2/raw/upload/v123456/rareroles/cvs/..." 
+        value=""
+      />
+      <button onclick="testCVUrl()">🔍 Test URL</button>
+      <button onclick="testAllStrategies()">🎯 Test All Strategies</button>
+      <button onclick="downloadWithStrategies()">⬇️ Try Download</button>
+      <div id="testResult"></div>
+      <ul id="strategyList" class="url-list" style="margin-top: 15px;"></ul>
+    </div>
+    
+    <div class="section">
+      <h2>2️⃣ Extract Public ID</h2>
+      <p style="margin-bottom: 10px; color: #6b7280;">Extract the public ID from a Cloudinary URL</p>
+      <button onclick="extractPublicId()">🔑 Extract Public ID</button>
+      <div id="publicIdResult"></div>
+    </div>
+    
+    <div class="section">
+      <h2>3️⃣ Generate Public URL</h2>
+      <p style="margin-bottom: 10px; color: #6b7280;">Generate a fresh public URL from public ID</p>
+      <input type="text" id="cloudName" placeholder="Cloud Name (e.g., rkgr2tc2)" value="rkgr2tc2" />
+      <input type="text" id="publicId" placeholder="Public ID (e.g., rareroles/cvs/user/file)" />
+      <button onclick="generatePublicUrl()">🌐 Generate Public URL</button>
+      <button onclick="generateDownloadUrl()">⬇️ Generate Download URL</button>
+      <div id="generateResult"></div>
+    </div>
+    
+    <div class="section">
+      <h2>4️⃣ Configuration Check</h2>
+      <button onclick="checkConfig()">⚙️ Check Cloudinary Config</button>
+      <div id="configResult"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Utility Functions
+    function extractPublicIdFromUrl(url) {
+      try {
+        const urlObj = new URL(url);
+        const pathParts = urlObj.pathname.split('/');
+        const uploadIndex = pathParts.indexOf('upload');
+        
+        if (uploadIndex === -1) return null;
+        
+        const parts = pathParts.slice(uploadIndex + 1);
+        
+        // Remove version
+        if (parts[0] && parts[0].startsWith('v') && !isNaN(Number(parts[0].substring(1)))) {
+          parts.shift();
+        }
+        
+        return parts.join('/').replace(/\.[^/.]+$/, '');
+      } catch (error) {
+        return null;
+      }
+    }
+    
+    function generateCloudinaryUrl(cloudName, publicId, options = {}) {
+      const { forceDownload = false, fileName = 'CV.pdf' } = options;
+      const transformations = [];
+      
+      if (forceDownload) {
+        transformations.push(`fl_attachment:${encodeURIComponent(fileName)}`);
+      }
+      
+      const baseUrl = `https://res.cloudinary.com/${cloudName}/raw/upload`;
+      const transformPart = transformations.length > 0 ? `/${transformations.join(',')}` : '';
+      
+      return `${baseUrl}${transformPart}/${publicId}.pdf`;
+    }
+    
+    function getStrategies(url) {
+      const publicId = extractPublicIdFromUrl(url);
+      const cloudName = 'rkgr2tc2';
+      const strategies = [];
+      
+      // Strategy 1: Original
+      strategies.push({ name: 'Original URL', url: url });
+      
+      // Strategy 2: Convert authenticated to public
+      const publicUrl = url.replace('/authenticated/', '/upload/');
+      if (publicUrl !== url) {
+        strategies.push({ name: 'Public URL', url: publicUrl });
+      }
+      
+      // Strategy 3: Fresh public URL with download
+      if (publicId) {
+        strategies.push({ 
+          name: 'Fresh Download URL', 
+          url: generateCloudinaryUrl(cloudName, publicId, { forceDownload: true }) 
+        });
+        
+        // Strategy 4: Fresh public URL without download
+        strategies.push({ 
+          name: 'Fresh View URL', 
+          url: generateCloudinaryUrl(cloudName, publicId, { forceDownload: false }) 
+        });
+      }
+      
+      return strategies;
+    }
+    
+    async function testUrl(url) {
+      try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return { success: response.ok, status: response.status, statusText: response.statusText };
+      } catch (error) {
+        return { success: false, status: 0, statusText: error.message };
+      }
+    }
+    
+    // Test Functions
+    async function testCVUrl() {
+      const url = document.getElementById('testUrl').value;
+      const resultDiv = document.getElementById('testResult');
+      
+      if (!url) {
+        resultDiv.innerHTML = '<div class="result error">❌ Please enter a URL</div>';
+        return;
+      }
+      
+      resultDiv.innerHTML = '<div class="result info">⏳ Testing URL accessibility...</div>';
+      
+      const result = await testUrl(url);
+      
+      if (result.success) {
+        resultDiv.innerHTML = `<div class="result success">✅ URL is accessible!\nStatus: ${result.status} ${result.statusText}</div>`;
+      } else {
+        resultDiv.innerHTML = `<div class="result error">❌ URL is NOT accessible\nStatus: ${result.status} ${result.statusText}\n\n${result.status === 401 ? '🔒 401 UNAUTHORIZED - Your Cloudinary upload preset is set to "authenticated" delivery mode.\n\nFIX: Change to "public" in Cloudinary Dashboard → Settings → Upload Presets' : ''}</div>`;
+      }
+    }
+    
+    async function testAllStrategies() {
+      const url = document.getElementById('testUrl').value;
+      const strategyList = document.getElementById('strategyList');
+      const resultDiv = document.getElementById('testResult');
+      
+      if (!url) {
+        resultDiv.innerHTML = '<div class="result error">❌ Please enter a URL</div>';
+        return;
+      }
+      
+      const strategies = getStrategies(url);
+      strategyList.innerHTML = '';
+      resultDiv.innerHTML = '<div class="result info">⏳ Testing all strategies...</div>';
+      
+      let successCount = 0;
+      
+      for (const strategy of strategies) {
+        const li = document.createElement('li');
+        li.className = 'testing';
+        li.innerHTML = `
+          <div>
+            <strong>${strategy.name}</strong><br/>
+            <small style="color: #6b7280;">${strategy.url}</small>
+          </div>
+          <span class="status-badge badge-testing">Testing...</span>
+        `;
+        strategyList.appendChild(li);
+        
+        const result = await testUrl(strategy.url);
+        
+        if (result.success) {
+          li.className = 'success';
+          li.querySelector('.status-badge').className = 'status-badge badge-success';
+          li.querySelector('.status-badge').textContent = `✅ ${result.status}`;
+          successCount++;
+        } else {
+          li.className = 'failed';
+          li.querySelector('.status-badge').className = 'status-badge badge-failed';
+          li.querySelector('.status-badge').textContent = `❌ ${result.status}`;
+        }
+      }
+      
+      if (successCount > 0) {
+        resultDiv.innerHTML = `<div class="result success">✅ ${successCount} out of ${strategies.length} strategies work!</div>`;
+      } else {
+        resultDiv.innerHTML = `<div class="result error">❌ All strategies failed!\n\nThis means your Cloudinary upload preset is configured for authenticated delivery.\n\nFIX: Go to Cloudinary Dashboard → Settings → Upload Presets → Edit "sember_preset" → Change delivery type to "public"</div>`;
+      }
+    }
+    
+    async function downloadWithStrategies() {
+      const url = document.getElementById('testUrl').value;
+      const resultDiv = document.getElementById('testResult');
+      
+      if (!url) {
+        resultDiv.innerHTML = '<div class="result error">❌ Please enter a URL</div>';
+        return;
+      }
+      
+      const strategies = getStrategies(url);
+      resultDiv.innerHTML = '<div class="result info">⏳ Attempting download...</div>';
+      
+      for (const strategy of strategies) {
+        try {
+          const response = await fetch(strategy.url);
+          if (response.ok) {
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = 'CV.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+            
+            resultDiv.innerHTML = `<div class="result success">✅ Download successful using: ${strategy.name}</div>`;
+            return;
+          }
+        } catch (error) {
+          console.error(strategy.name, error);
+        }
+      }
+      
+      resultDiv.innerHTML = '<div class="result error">❌ All download strategies failed. Opening in new tab...</div>';
+      window.open(url, '_blank');
+    }
+    
+    function extractPublicId() {
+      const url = document.getElementById('testUrl').value;
+      const resultDiv = document.getElementById('publicIdResult');
+      
+      if (!url) {
+        resultDiv.innerHTML = '<div class="result error">❌ Please enter a URL in the Test URL field above</div>';
+        return;
+      }
+      
+      const publicId = extractPublicIdFromUrl(url);
+      
+      if (publicId) {
+        document.getElementById('publicId').value = publicId;
+        resultDiv.innerHTML = `<div class="result success">✅ Public ID extracted:\n\n${publicId}</div>`;
+      } else {
+        resultDiv.innerHTML = '<div class="result error">❌ Could not extract public ID from URL</div>';
+      }
+    }
+    
+    function generatePublicUrl() {
+      const cloudName = document.getElementById('cloudName').value;
+      const publicId = document.getElementById('publicId').value;
+      const resultDiv = document.getElementById('generateResult');
+      
+      if (!cloudName || !publicId) {
+        resultDiv.innerHTML = '<div class="result error">❌ Please enter both cloud name and public ID</div>';
+        return;
+      }
+      
+      const url = generateCloudinaryUrl(cloudName, publicId, { forceDownload: false });
+      resultDiv.innerHTML = `<div class="result success">✅ Generated URL:\n\n${url}\n\n<button onclick="window.open('${url}', '_blank')" style="margin-top: 10px;">🌐 Open URL</button></div>`;
+    }
+    
+    function generateDownloadUrl() {
+      const cloudName = document.getElementById('cloudName').value;
+      const publicId = document.getElementById('publicId').value;
+      const resultDiv = document.getElementById('generateResult');
+      
+      if (!cloudName || !publicId) {
+        resultDiv.innerHTML = '<div class="result error">❌ Please enter both cloud name and public ID</div>';
+        return;
+      }
+      
+      const url = generateCloudinaryUrl(cloudName, publicId, { forceDownload: true, fileName: 'CV.pdf' });
+      resultDiv.innerHTML = `<div class="result success">✅ Generated Download URL:\n\n${url}\n\n<button onclick="window.open('${url}', '_blank')" style="margin-top: 10px;">⬇️ Test Download</button></div>`;
+    }
+    
+    function checkConfig() {
+      const cloudName = document.getElementById('cloudName').value;
+      const resultDiv = document.getElementById('configResult');
+      
+      const issues = [];
+      
+      if (!cloudName) {
+        issues.push('❌ Cloud name is missing');
+      } else {
+        issues.push(`✅ Cloud name: ${cloudName}`);
+      }
+      
+      const testUrl = `https://res.cloudinary.com/${cloudName}/raw/upload/test.pdf`;
+      issues.push(`\n📋 Test URL format:\n${testUrl}`);
+      issues.push(`\n💡 If you get 401 errors, your upload preset "sember_preset" is set to authenticated delivery.`);
+      issues.push(`\nFIX: Cloudinary Dashboard → Settings → Upload Presets → Edit "sember_preset" → Set delivery type to "public"`);
+      
+      resultDiv.innerHTML = `<div class="result info">${issues.join('\n')}</div>`;
+    }
+  </script>
+</body>
+</html>

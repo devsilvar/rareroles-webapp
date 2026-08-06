@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import logoWhite from "../assets/logo-white.jpg";
+import { useGetStarted } from "./get-started-modal";
 
 export function SiteFooter() {
+  const { open: openGetStarted } = useGetStarted();
+
   return (
     <footer className="border-t border-border bg-surface">
       <div className="container-page py-16 md:py-24">
@@ -9,29 +11,31 @@ export function SiteFooter() {
           <div className="md:col-span-5">
             <Link to="/" className="flex items-center gap-3 text-foreground">
               <img
-                src={logoWhite}
+                src="/logo.jpg"
                 alt="RareRoles"
-                className="h-10 w-auto object-contain md:h-11"
+                className="h-12 w-auto object-contain md:h-14"
               />
             </Link>
             <p className="text-display mt-8 max-w-md text-3xl text-foreground md:text-4xl">
               Connecting companies to rare tech talent.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/contact"
+              <button
+                type="button"
+                onClick={() => openGetStarted("hiring")}
                 className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-display text-sm font-bold text-accent-foreground shadow-lg transition-all duration-200 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
               >
                 Hire talent
                 <span className="transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-              <Link
-                to="/talent"
+              </button>
+              <button
+                type="button"
+                onClick={() => openGetStarted("talent")}
                 className="group inline-flex items-center gap-2 rounded-full border-2 border-border-strong px-5 py-2.5 font-display text-sm font-bold text-foreground transition-all duration-200 hover:scale-105 hover:border-foreground/40 hover:bg-surface-elevated"
               >
                 Join network
                 <span className="transition-transform group-hover:translate-x-1">→</span>
-              </Link>
+              </button>
             </div>
           </div>
 

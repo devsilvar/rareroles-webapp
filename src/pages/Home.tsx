@@ -18,11 +18,17 @@ import {
   StarIcon,
 } from "@heroicons/react/24/solid";
 import type { SVGProps } from "react";
-import { Section, Eyebrow, CTAButton } from "../components/ui-bits";
+import { Section, Eyebrow } from "../components/ui-bits";
 import { Hero } from "../components/hero";
 import { useGetStarted } from "../components/get-started-modal";
 import { StatCard } from "../components/stat-card";
 import { AnimatedCounter } from "../components/animated-counter";
+import techgirlImg from "../assets/techgirl.jpg";
+import r1Img from "../assets/r1.jpg";
+import r2Img from "../assets/r2.jpg";
+import r4Img from "../assets/r4.jfif";
+import shakeeImg from "../assets/shakeee.webp";
+import prepareImg from "../assets/prepare.jpg";
 import stepBriefImg from "../assets/step-brief.jpg";
 import stepShortlistImg from "../assets/step-shortlist.jpg";
 import stepHireImg from "../assets/step-hire.jpg";
@@ -78,6 +84,18 @@ const frontierRoles: FrontierRole[] = [
     blurb: "",
     cta: "",
     icon: ChartBarIcon,
+  },
+  {
+    title: "AI Operators",
+    blurb: "",
+    cta: "",
+    icon: BoltIcon,
+  },
+  {
+    title: "AI-Enabled Software Engineers",
+    blurb: "",
+    cta: "",
+    icon: SparklesIcon,
   },
 ];
 
@@ -166,9 +184,9 @@ export default function Home() {
 
               {/* Subtle visual break */}
               <div className="mt-6 flex items-center gap-3">
-                <div className="h-px w-12 bg-[#E91E63]" />
-                <div className="h-1 w-1 rounded-full bg-[#E91E63]/40" />
-                <div className="h-1 w-1 rounded-full bg-[#E91E63]/20" />
+                <div className="h-px w-12 bg-accent" />
+                <div className="h-1 w-1 rounded-full bg-accent/40" />
+                <div className="h-1 w-1 rounded-full bg-accent/20" />
               </div>
 
               {/* Body content - Perfect spacing and typography */}
@@ -183,7 +201,7 @@ export default function Home() {
               </div>
               
               {/* Conclusion - Minimalist emphasis */}
-              <div className="relative mt-10 pl-4 border-l-2 border-[#E91E63]">
+              <div className="relative mt-10 pl-4 border-l-2 border-accent">
                 <p className="text-xl md:text-2xl font-bold text-slate-900 leading-relaxed">
                   That is where RareRoles comes in.
                 </p>
@@ -202,13 +220,13 @@ export default function Home() {
                   <div className="relative py-8 transition-all duration-700 ease-out hover:pl-4">
                     
                     {/* Left accent line - slides in on hover */}
-                    <div className="absolute left-0 top-0 bottom-0 w-px bg-[#E91E63] scale-y-0 origin-top transition-transform duration-700 ease-out group-hover:scale-y-100" />
+                    <div className="absolute left-0 top-0 bottom-0 w-px bg-accent scale-y-0 origin-top transition-transform duration-700 ease-out group-hover:scale-y-100" />
                     
                     <div className="flex items-start gap-6">
                       {/* Pure icon - no decoration */}
                       <div className="shrink-0 pt-1">
                         <s.icon 
-                          className="h-10 w-10 md:h-11 md:w-11 text-[#E91E63] transition-transform duration-700 ease-out group-hover:scale-105" 
+                          className="h-10 w-10 md:h-11 md:w-11 text-accent transition-transform duration-700 ease-out group-hover:scale-105" 
                           strokeWidth={1.5}
                         />
                       </div>
@@ -219,7 +237,7 @@ export default function Home() {
                         <AnimatedCounter 
                           value={s.value}
                           duration={2500}
-                          className="font-display text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-none transition-colors duration-700 group-hover:text-[#E91E63]"
+                          className="font-display text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-none transition-colors duration-700 group-hover:text-accent"
                         />
                         
                         {/* Label - simple and clear */}
@@ -266,8 +284,8 @@ export default function Home() {
         {/* Full-width image - edge to edge, reduced height */}
         <div className="relative w-full">
           <img
-            src={teamMeetingImg}
-            alt="Senior advisors reviewing a search mandate"
+            src={prepareImg}
+            alt="What we do - preparing talent ahead of time"
             width={1920}
             height={600}
             loading="lazy"
@@ -292,14 +310,14 @@ export default function Home() {
                 icon: CheckBadgeIcon,
               },
               {
-                title: "Less stress",
+                title: "Reduced Hiring Cost",
                 description: "One point of contact, done properly",
                 icon: ShieldCheckIcon,
               },
             ].map((item) => (
               <div key={item.title} className="group relative">
                 {/* Refined card - smaller, tighter */}
-                <div className="relative overflow-hidden rounded-xl border-2 border-border bg-card/95 backdrop-blur-xl px-6 py-8 shadow-lg transition-all duration-500 hover:border-accent hover:shadow-2xl hover:shadow-accent/10">
+                <div className="relative overflow-hidden rounded-none border-2 border-border bg-card/95 backdrop-blur-xl px-6 py-8 shadow-lg transition-all duration-500 hover:border-accent hover:shadow-2xl hover:shadow-accent/10">
                   {/* Large beautiful icon - no circles */}
                   <item.icon className="h-10 w-10 text-accent transition-transform duration-500 group-hover:scale-110" />
 
@@ -360,7 +378,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => openGetStarted("hiring", r.title)}
-                  className="group/btn relative overflow-hidden rounded-full bg-foreground from-[#E91E63] to-[#FF5722] px-4 py-3 text-center font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#E91E63]/30 active:scale-[0.98]"
+                  className="group/btn relative overflow-hidden rounded-full bg-accent px-4 py-3 text-center font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/30 active:scale-[0.98]"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     <span>Hire This Role</span>
@@ -414,7 +432,7 @@ export default function Home() {
 
           <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {steps.map((s, i) => {
-              const img = [stepBriefImg, stepShortlistImg, stepHireImg][i];
+              const img = [r1Img, r2Img, r4Img][i];
               return (
                 <li
                   key={s.n}
@@ -428,7 +446,7 @@ export default function Home() {
                       width={1024}
                       height={1024}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
                     />
                     {/* gradient wash for legibility */}
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/10 to-transparent" />
@@ -469,14 +487,21 @@ export default function Home() {
                     Let's help you fill your hardest roles
                   </h2>
                   <div className="mt-10">
-                    <CTAButton to="/contact">Get Started</CTAButton>
+                    <button
+                      type="button"
+                      onClick={() => openGetStarted()}
+                      className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-display text-sm font-bold tracking-tight text-accent-foreground shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+                    >
+                      Get Started
+                      <span className="transition-transform group-hover:translate-x-1">→</span>
+                    </button>
                   </div>
                 </div>
               </div>
               <div className="relative hidden min-h-[320px] md:block">
                 <img
-                  src={enterpriseArchitectureImg}
-                  alt="Modern enterprise headquarters"
+                  src={techgirlImg}
+                  alt="Tech professional ready for their next role"
                   width={1024}
                   height={768}
                   loading="lazy"

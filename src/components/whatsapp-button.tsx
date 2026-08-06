@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // Configure your WhatsApp business number here (with country code, no + or spaces)
 // Example: "2348012345678" for Nigeria
-const WHATSAPP_NUMBER = "2348012345678";
+const WHATSAPP_NUMBER = "2348082464543";
 
 // Customize the pre-filled message
 const DEFAULT_MESSAGE = "Hi! I'd like to book a call to discuss my hiring needs.";

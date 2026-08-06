@@ -7,6 +7,11 @@ import {
   ShieldCheckIcon,
 } from "@heroicons/react/24/solid";
 import { useGetStarted } from "./get-started-modal";
+import headshot1Img from "../assets/headshot (1).jfif";
+import headshot2Img from "../assets/headshot (2).jfif";
+import headshot3Img from "../assets/headshot (3).jfif";
+import headshot4Img from "../assets/headshot (4).jfif";
+import headshot5Img from "../assets/headshot (5).jfif";
 
 export function Hero() {
   const { open: openGetStarted } = useGetStarted();
@@ -31,7 +36,7 @@ export function Hero() {
 
       <div className="container-page relative">
         {/* Centered, full-width hero content */}
-        <div className="flex min-h-[85vh] items-center justify-center py-12 sm:py-16 md:py-24 lg:py-32">
+        <div className="flex min-h-[75vh] items-center justify-center py-10 sm:py-12 md:py-16 lg:py-20">
           <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
             {/* Badge - HIDDEN ON MOBILE, visible on large screens */}
             <div className="hidden justify-center lg:flex">
@@ -39,7 +44,7 @@ export function Hero() {
             </div>
 
             {/* Heading - optimized for mobile, well-sized across all screens */}
-            <h1 className="text-hero-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight lg:mt-8 lg:text-6xl lg:leading-tight xl:text-7xl xl:leading-tight">
+            <h1 className="text-hero-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight lg:mt-6 lg:text-6xl lg:leading-tight xl:text-7xl xl:leading-tight">
               Hire Rare Tech Talent{" "}
               <span className="relative inline-block">
                 <span className="relative z-10 text-accent drop-shadow-lg">Without Stress</span>
@@ -60,7 +65,7 @@ export function Hero() {
               {[
                 { icon: CheckBadgeIcon, label: "Pre-vetted specialists" },
                 { icon: BoltIcon, label: "Faster hiring" },
-                { icon: ShieldCheckIcon, label: "90-day guarantee" },
+                { icon: ShieldCheckIcon, label: "Reduced Hiring Cost" },
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
@@ -88,24 +93,20 @@ export function Hero() {
             </div>
 
             {/* Trust indicators - compact on mobile */}
-            <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4 md:mt-12 md:gap-5">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:mt-8 sm:flex-row sm:justify-center sm:gap-4 md:mt-10 md:gap-5">
               {/* Avatars - smaller on mobile */}
               <div className="flex -space-x-2">
-                {[
-                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces",
-                  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=faces",
-                  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=faces",
-                  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=faces",
-                  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=faces",
-                ].map((src, i) => (
-                  <img
-                    key={i}
-                    src={src}
-                    alt={`Specialist ${i + 1}`}
-                    className="h-8 w-8 rounded-full border-2 border-white/50 object-cover shadow-xl ring-2 ring-white/20 sm:h-10 sm:w-10 md:h-11 md:w-11"
-                    loading="lazy"
-                  />
-                ))}
+                {[headshot1Img, headshot2Img, headshot3Img, headshot4Img, headshot5Img].map(
+                  (src, i) => (
+                    <img
+                      key={i}
+                      src={src}
+                      alt={`Specialist ${i + 1}`}
+                      className="h-8 w-8 rounded-full border-2 border-white/50 object-cover shadow-xl ring-2 ring-white/20 sm:h-10 sm:w-10 md:h-11 md:w-11"
+                      loading="lazy"
+                    />
+                  ),
+                )}
               </div>
 
               {/* Stats - compact on mobile */}
@@ -118,7 +119,7 @@ export function Hero() {
             </div>
 
             {/* Scroll indicator - hidden on mobile for space efficiency */}
-            <div className="mt-10 hidden justify-center sm:flex md:mt-12 lg:mt-16">
+            <div className="mt-8 hidden justify-center sm:flex md:mt-10 lg:mt-12">
               <div className="flex flex-col items-center gap-2 text-white/60">
                 <span className="text-xs font-medium uppercase tracking-wider">
                   Scroll to explore

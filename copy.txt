@@ -1,239 +1,602 @@
-RARE ROLES – WEBSITE DESIGN BRIEF
+/**
+ * RareRoles Webhook Handler for Google Sheets
+ * 
+ * SETUP INSTRUCTIONS:
+ * 1. Create a new Google Spreadsheet
+ * 2. Create three sheets named exactly: "Hiring Enquiries", "Talent Submissions", "Contacts"
+ * 3. Go to Extensions > Apps Script
+ * 4. Replace all code with this file
+ * 5. Click Deploy > New Deployment > Web App
+ * 6. Set "Execute as" to "Me"
+ * 7. Set "Who has access" to "Anyone"
+ * 8. Click Deploy and copy the URL
+ * 9. Add the URL to your .env as VITE_GOOGLE_APPS_SCRIPT_URL
+ * 10. Generate a secret key and add as VITE_GOOGLE_APPS_SCRIPT_SECRET
+ */
 
-HOME PAGE
-Hero Section:1
-Headline:
-Hire Rare Tech Talent Without Stress
-Subtext:
-We focus on what others struggle to fill:
-Rare roles
-Hard-to-fill positions
-Experienced niche talent.
+// Configuration - Change this to match your secret in .env
+const SECRET_KEY = '3f8d6a9e445d46f0bab0'; // IMPORTANT: Change this!
 
-Buttons:
-Hire Talent
+// Email Configuration
+const SEND_AUTO_EMAILS = true; // Set to false to disable auto-emails
+const CALENDLY_LINK = 'https://calendly.com/your-company/consultation'; // IMPORTANT: Change this!
+const COMPANY_NAME = 'RareRoles';
+const REPLY_TO_EMAIL = 'sember@rarerolestechnologies.com'; // IMPORTANT: Change this!
 
-Join Talent Network
+/**
+ * Main webhook handler
+ */
+function doPost(e) {
+  try {
+    // Parse the incoming payload
+    var payload = JSON.parse(e.postData.contents);
+    
+    // Verify secret key for security
+    if (payload.secret !== SECRET_KEY) {
+      return createResponse(false, 'Invalid secret key');
+    }
+    
+    // Get the active spreadsheet
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // Route to appropriate handler based on type
+    switch (payload.type) {
+      case 'hiring':
+        return handleHiringEnquiry(spreadsheet, payload.data);
+      case 'talent':
+        return handleTalentSubmission(spreadsheet, payload.data);
+      case 'contact':
+        return handleContact(spreadsheet, payload.data);
+      default:
+        return createResponse(false, 'Unknown submission type');
+    }
+    
+  } catch (error) {
+    Logger.log('Error in doPost: ' + error.toString());
+    return createResponse(false, error.toString());
+  }
+}
 
-Section 2: The Problem
-Headline:
-Hiring rare tech roles is not easy
-Text:
-Some roles are hard to fill.
-Not because people are not hiring, but because the right talent is hard to find.
-These roles remain open for months, slowing business growth.
-That is where RareRoles comes in.
+/**
+ * Handle hiring enquiry submissions
+ */
+function handleHiringEnquiry(spreadsheet, data) {
+  try {
+    var sheet = spreadsheet.getSheetByName('Hiring Enquiries');
+    
+    // Create sheet if it doesn't exist
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet('Hiring Enquiries');
+      // Add headers
+      sheet.appendRow([
+        'Timestamp',
+        'Company',
+        'Contact Name',
+        'Email',
+        'Phone',
+        'Location',
+        'Roles',
+        'Seniority',
+        'Timeline',
+        'Details',
+        'Contacted',
+        'Contacted At',
+        'Contacted By'
+      ]);
+      
+      // Format header row
+      var headerRange = sheet.getRange(1, 1, 1, 13);
+      headerRange.setFontWeight('bold');
+      headerRange.setBackground('#E91E63');
+      headerRange.setFontColor('#FFFFFF');
+      sheet.setFrozenRows(1);
+    }
+    
+    // Format roles array for display
+    var rolesText = '';
+    if (data.roles && Array.isArray(data.roles)) {
+      rolesText = data.roles.map(function(role) {
+        return role.title + ' (x' + role.count + ')';
+      }).join(', ');
+    }
+    
+    // Append the new row
+    sheet.appendRow([
+      new Date(),
+      data.company || '',
+      data.contact_name || '',
+      data.email || '',
+      data.phone || '',
+      data.location || '',
+      rolesText,
+      data.seniority || '',
+      data.timeline || '',
+      data.details || '',
+      false,
+      '',
+      ''
+    ]);
+    
+    // Auto-resize columns for better readability
+    sheet.autoResizeColumns(1, 13);
+    
+    // Send automatic confirmation email to the employer
+    if (SEND_AUTO_EMAILS) {
+      try {
+        sendHiringConfirmationEmail(data);
+      } catch (emailError) {
+        Logger.log('Email sending failed (non-critical): ' + emailError.toString());
+        // Don't fail the webhook if email fails - data is already saved
+      }
+    }
+    
+    return createResponse(true, 'Hiring enquiry saved', sheet.getLastRow());
+    
+  } catch (error) {
+    Logger.log('Error in handleHiringEnquiry: ' + error.toString());
+    return createResponse(false, error.toString());
+  }
+}
 
-Section 3: What We Do
-Headline:
-We don’t wait for roles — we prepare ahead
-Text:
-At RareRoles, we don’t start searching when you contact us.
-We already have access to pre-qualified talent in niche areas.
-This means you get:
-Faster hiring
+/**
+ * Handle talent submission
+ */
+function handleTalentSubmission(spreadsheet, data) {
+  try {
+    var sheet = spreadsheet.getSheetByName('Talent Submissions');
+    
+    // Create sheet if it doesn't exist
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet('Talent Submissions');
+      // Add headers
+      sheet.appendRow([
+        'Timestamp',
+        'Name',
+        'Email',
+        'Phone',
+        'Desired Role',
+        'Custom Role',
+        'Experience',
+        'Location',
+        'Links',
+        'About',
+        'CV URL',
+        'CV File Name',
+        'Contacted',
+        'Contacted At',
+        'Contacted By'
+      ]);
+      
+      // Format header row
+      var headerRange = sheet.getRange(1, 1, 1, 15);
+      headerRange.setFontWeight('bold');
+      headerRange.setBackground('#E91E63');
+      headerRange.setFontColor('#FFFFFF');
+      sheet.setFrozenRows(1);
+    }
+    
+    // Determine the final role to display
+    var finalRole = data.desired_role || '';
+    if (data.desired_role === 'Other' && data.custom_role) {
+      finalRole = data.custom_role;
+    }
+    
+    // Append the new row
+    sheet.appendRow([
+      new Date(),
+      data.name || '',
+      data.email || '',
+      data.phone || '',
+      data.desired_role || '',
+      data.custom_role || '',
+      data.experience || '',
+      data.location || '',
+      data.links || '',
+      data.about || '',
+      data.cv_url || '',
+      data.cv_file_name || '',
+      false,
+      '',
+      ''
+    ]);
+    
+    // Auto-resize columns for better readability
+    sheet.autoResizeColumns(1, 15);
+    
+    return createResponse(true, 'Talent submission saved', sheet.getLastRow());
+    
+  } catch (error) {
+    Logger.log('Error in handleTalentSubmission: ' + error.toString());
+    return createResponse(false, error.toString());
+  }
+}
 
-Better candidates
+/**
+ * Handle contact form submissions
+ */
+function handleContact(spreadsheet, data) {
+  try {
+    var sheet = spreadsheet.getSheetByName('Contacts');
+    
+    // Create sheet if it doesn't exist
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet('Contacts');
+      // Add headers
+      sheet.appendRow([
+        'Timestamp',
+        'Name',
+        'Email',
+        'Company',
+        'Message',
+        'Source',
+        'Contacted',
+        'Contacted At',
+        'Contacted By'
+      ]);
+      
+      // Format header row
+      var headerRange = sheet.getRange(1, 1, 1, 9);
+      headerRange.setFontWeight('bold');
+      headerRange.setBackground('#E91E63');
+      headerRange.setFontColor('#FFFFFF');
+      sheet.setFrozenRows(1);
+    }
+    
+    // Append the new row
+    sheet.appendRow([
+      new Date(),
+      data.name || '',
+      data.email || '',
+      data.company || '',
+      data.message || '',
+      data.source || '',
+      false,
+      '',
+      ''
+    ]);
+    
+    // Auto-resize columns for better readability
+    sheet.autoResizeColumns(1, 9);
+    
+    return createResponse(true, 'Contact saved', sheet.getLastRow());
+    
+  } catch (error) {
+    Logger.log('Error in handleContact: ' + error.toString());
+    return createResponse(false, error.toString());
+  }
+}
 
-Less stress
+/**
+ * Send confirmation email to employer after hiring enquiry
+ */
+function sendHiringConfirmationEmail(data) {
+  var recipientEmail = data.email;
+  var recipientName = data.contact_name || 'there';
+  var companyName = data.company || 'your company';
+  
+  // Format the roles list for email
+  var rolesText = '';
+  if (data.roles && Array.isArray(data.roles)) {
+    rolesText = data.roles.map(function(role) {
+      return '  • ' + role.title + (role.count > 1 ? ' (x' + role.count + ')' : '');
+    }).join('\n');
+  }
+  
+  var subject = '🎯 Your Talent Request is In - Let\'s Find Your Perfect Match!';
+  
+  var htmlBody = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 40px 30px; text-align: center; border-radius: 10px 10px 0 0; }
+    .header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+    .header p { margin: 10px 0 0 0; font-size: 16px; opacity: 0.9; }
+    .content { background: white; padding: 40px 30px; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; }
+    .greeting { font-size: 18px; color: #1a1a2e; margin-bottom: 20px; }
+    .roles-box { background: #f8f9fa; border-left: 4px solid #E91E63; padding: 20px; margin: 25px 0; border-radius: 5px; }
+    .roles-box h3 { margin: 0 0 15px 0; color: #1a1a2e; font-size: 16px; }
+    .roles-list { margin: 0; color: #555; font-size: 15px; line-height: 1.8; white-space: pre-line; }
+    .cta-section { background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%); padding: 30px; text-align: center; border-radius: 10px; margin: 30px 0; }
+    .cta-section h2 { color: white; margin: 0 0 15px 0; font-size: 22px; }
+    .cta-section p { color: white; margin: 0 0 20px 0; font-size: 15px; opacity: 0.95; }
+    .cta-button { display: inline-block; background: white; color: #E91E63; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 16px; transition: transform 0.2s; }
+    .cta-button:hover { transform: scale(1.05); }
+    .what-next { background: #fff8e1; border-radius: 8px; padding: 20px; margin: 25px 0; }
+    .what-next h3 { margin: 0 0 15px 0; color: #f57c00; font-size: 18px; }
+    .what-next ul { margin: 0; padding-left: 20px; color: #555; }
+    .what-next li { margin: 8px 0; }
+    .footer { background: #f5f5f5; padding: 30px; text-align: center; border-radius: 0 0 10px 10px; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; }
+    .footer p { margin: 5px 0; font-size: 14px; color: #666; }
+    .footer a { color: #E91E63; text-decoration: none; }
+    .emoji { font-size: 24px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>✨ We Got Your Request!</h1>
+      <p>Your search for exceptional talent starts now</p>
+    </div>
+    
+    <!-- Content -->
+    <div class="content">
+      <div class="greeting">
+        Hey ${recipientName}! 👋
+      </div>
+      
+      <p>
+        Thanks for trusting <strong>${COMPANY_NAME}</strong> to help ${companyName} find the perfect talent. 
+        We're pumped to get started! 🚀
+      </p>
+      
+      <!-- Roles Summary -->
+      <div class="roles-box">
+        <h3>🎯 What You're Looking For:</h3>
+        <div class="roles-list">${rolesText || '  • Custom requirements as discussed'}</div>
+      </div>
+      
+      <p>
+        Our team is already on it, scouring our network of top-tier professionals who match your needs. 
+        We specialize in finding those <strong>rare roles</strong> that make all the difference. 💎
+      </p>
+      
+      <!-- CTA Section -->
+      <div class="cta-section">
+        <h2>🗓️ Want to Fast-Track This?</h2>
+        <p>
+          Book a quick 15-30 minute consultation call with our talent experts. 
+          We'll discuss your requirements in detail and create a custom hiring strategy.
+        </p>
+        <a href="${CALENDLY_LINK}" class="cta-button">
+          📅 Book Your Free Consultation
+        </a>
+      </div>
+      
+      <!-- What Happens Next -->
+      <div class="what-next">
+        <h3>⚡ What Happens Next:</h3>
+        <ul>
+          <li><strong>Within 24 hours:</strong> We'll review your requirements and start matching</li>
+          <li><strong>Within 48-72 hours:</strong> You'll receive curated candidate profiles</li>
+          <li><strong>Throughout:</strong> We'll keep you updated on our progress</li>
+          <li><strong>Optional:</strong> Book a consultation call above for immediate strategy session</li>
+        </ul>
+      </div>
+      
+      <p>
+        Got questions in the meantime? Just hit reply to this email - we're here to help! 💪
+      </p>
+      
+      <p style="margin-top: 30px;">
+        <strong>Let's find you some amazing talent!</strong><br>
+        The ${COMPANY_NAME} Team
+      </p>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p><strong>${COMPANY_NAME}</strong></p>
+      <p>Finding Rare Talent for Extraordinary Teams</p>
+      <p style="margin-top: 15px; font-size: 12px; color: #999;">
+        This is an automated confirmation. We'll be in touch soon with personalized updates.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  var plainBody = `
+Hey ${recipientName}! 👋
 
-Section:4 Roles We Cover
-Headline:
-Roles we specialize in
-List:
-Oracle PL/SQL Developers
+Thanks for trusting ${COMPANY_NAME} to help ${companyName} find the perfect talent. We're pumped to get started! 🚀
 
-CCIE Network Engineers
+🎯 WHAT YOU'RE LOOKING FOR:
+${rolesText || '• Custom requirements as discussed'}
 
-AIX System Administrators
+Our team is already on it, scouring our network of top-tier professionals who match your needs. We specialize in finding those rare roles that make all the difference. 💎
 
-SharePoint Engineers
+🗓️ WANT TO FAST-TRACK THIS?
 
-AI / Machine Learning Engineers
+Book a quick 15-30 minute consultation call with our talent experts. We'll discuss your requirements in detail and create a custom hiring strategy.
 
-AI Automation Engineers
+📅 Book Your Free Consultation:
+${CALENDLY_LINK}
 
-Solution Architects
+⚡ WHAT HAPPENS NEXT:
 
-Section:5 How It Works
-Headline:
-Simple process
-Steps:
-1. Tell us the role you want to fill
-2. We match you with the right talent
-3. You hire faster and easier
+• Within 24 hours: We'll review your requirements and start matching
+• Within 48-72 hours: You'll receive curated candidate profiles  
+• Throughout: We'll keep you updated on our progress
+• Optional: Book a consultation call above for immediate strategy session
 
-Section: Call to Action
-Headline:
-Let’s help you fill your hardest roles
-Button:
-Get Started
+Got questions in the meantime? Just hit reply to this email - we're here to help! 💪
 
+Let's find you some amazing talent!
 
-FOR COMPANIES PAGE
-Header
-Section: 1 Headline:
-Hire Rare Talent Faster
-Subtext:
-We help you fill hard-to-find roles without wasting time
+The ${COMPANY_NAME} Team
 
-Section:2 Why RareRoles
-Headline:
-Why companies choose us
-Text:
-We focus only on rare and hard-to-fill roles.
-We understand where to find these professionals and how to engage them.
+---
+${COMPANY_NAME} - Finding Rare Talent for Extraordinary Teams
+This is an automated confirmation. We'll be in touch soon with personalized updates.
+  `;
+  
+  // Send the email
+  MailApp.sendEmail({
+    to: recipientEmail,
+    subject: subject,
+    htmlBody: htmlBody,
+    body: plainBody,
+    replyTo: REPLY_TO_EMAIL,
+    name: COMPANY_NAME
+  });
+  
+  Logger.log('Confirmation email sent to: ' + recipientEmail);
+}
 
-Section:3 What You Get
-Headline:
-What you get
-List:
-Access to pre-vetted talent
+/**
+ * Create a standardized JSON response
+ */
+function createResponse(success, message, id) {
+  var response = {
+    success: success,
+    timestamp: new Date().toISOString()
+  };
+  
+  if (success) {
+    response.id = id || 'unknown';
+    response.message = message || 'Success';
+  } else {
+    response.error = message || 'Unknown error';
+  }
+  
+  return ContentService
+    .createTextOutput(JSON.stringify(response))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
-Faster time to hire
+/**
+ * Test function to verify setup
+ */
+function testSetup() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  
+  Logger.log('Testing RareRoles Webhook Handler Setup...');
+  Logger.log('Spreadsheet: ' + spreadsheet.getName());
+  
+  // Test hiring enquiry
+  var testHiring = {
+    company: 'Test Company',
+    contact_name: 'Test User',
+    email: 'test@test.com',
+    phone: '+44 7700 900000',
+    location: 'London',
+    roles: [
+      { title: 'Backend Engineer', count: 2 },
+      { title: 'Frontend Engineer', count: 1 }
+    ],
+    seniority: 'Senior',
+    timeline: 'ASAP',
+    details: 'Test hiring enquiry'
+  };
+  
+  var hiringResult = handleHiringEnquiry(spreadsheet, testHiring);
+  Logger.log('Hiring test result: ' + hiringResult.getContent());
+  
+  // Test talent submission
+  var testTalent = {
+    name: 'Jane Doe',
+    email: 'jane@test.com',
+    phone: '+44 7700 900001',
+    desired_role: 'Other',
+    custom_role: 'AI Product Designer',
+    experience: 'Senior',
+    location: 'Remote',
+    links: 'https://linkedin.com/in/janedoe',
+    about: 'Test talent submission',
+    cv_url: 'https://example.com/cv.pdf',
+    cv_file_name: 'jane-doe-cv.pdf'
+  };
+  
+  var talentResult = handleTalentSubmission(spreadsheet, testTalent);
+  Logger.log('Talent test result: ' + talentResult.getContent());
+  
+  // Test contact
+  var testContact = {
+    name: 'John Smith',
+    email: 'john@test.com',
+    company: 'Test Corp',
+    message: 'Test contact message',
+    source: 'Contact Page'
+  };
+  
+  var contactResult = handleContact(spreadsheet, testContact);
+  Logger.log('Contact test result: ' + contactResult.getContent());
+  
+  Logger.log('Test complete! Check your spreadsheet for the test data.');
+}
 
-Reduced hiring risk
+/**
+ * Clean test data (optional helper function)
+ */
+function cleanTestData() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheets = ['Hiring Enquiries', 'Talent Submissions', 'Contacts'];
+  
+  sheets.forEach(function(sheetName) {
+    var sheet = spreadsheet.getSheetByName(sheetName);
+    if (sheet) {
+      // Keep only header row
+      var lastRow = sheet.getLastRow();
+      if (lastRow > 1) {
+        sheet.deleteRows(2, lastRow - 1);
+      }
+    }
+  });
+  
+  Logger.log('Test data cleaned!');
+}
 
-Support for critical roles
+/**
+ * Test email sending function
+ * IMPORTANT: Change the email to YOUR email before running!
+ */
+function testEmail() {
+  var testData = {
+    company: 'Acme Corporation',
+    contact_name: 'John Smith',
+    email: 'your-email@example.com', // CHANGE THIS TO YOUR EMAIL!
+    phone: '+44 7700 900000',
+    location: 'London, UK',
+    roles: [
+      { title: 'Backend Engineer', count: 2 },
+      { title: 'DevOps Engineer', count: 1 },
+      { title: 'Product Manager', count: 1 }
+    ],
+    seniority: 'Senior',
+    timeline: 'ASAP'
+  };
+  
+  Logger.log('Sending test email...');
+  
+  try {
+    sendHiringConfirmationEmail(testData);
+    Logger.log('✅ Test email sent successfully!');
+    Logger.log('Check your inbox: ' + testData.email);
+  } catch (error) {
+    Logger.log('❌ Email test failed: ' + error.toString());
+  }
+}
 
-Section: 4 Our Services
-1. Staffing:
-A.Contract Talent
-(Get skilled professionals quickly when you need them.
-Choose from flexible options—either hire from our network of contract experts or bring in full-time professionals that fit your needs.)
-Button:
-Book Consultation 
-
-B: Permanent Talent
-Hire the right people and grow faster.
-)Quickly find experienced professionals—from entry-level to senior leaders—to build a strong, long-term team.)
-Button:
-Book Consultation 
-
-Talent Pipeline Access
-We give you access to talent even before roles open
-
-C. Early Talent Solutions 
-
-Our Business Model
-Talk to our team to learn more
-
-Section 5: Industries We Serve
-Headline:
-Industries we support
-List:
-Banking
-
-Fintech
-
-Consulting (Big 4)
-
-Telecom
-
-Enterprise Tech
-
-Section:6 CTA
-Headline:
-Let’s help you hire better
-Button:
-Book a Call
-
-
-FOR TALENT PAGE
-Section: 1 Header
-Headline:
-Access Better Opportunities
-Subtext:
-Get connected to roles you won’t easily find online
-
-Section 2: Why Join RareRoles
-Headline:
-Why join us
-Text:
-We connect you to high-value and specialized roles.
-We work with companies looking for your exact skills.
-
-Section 3: What You Get
-Headline:
-What you get
-List:
-Access to exclusive job opportunities
-
-Visibility to top companies
-
-Career growth opportunities
-
-Section: 4 Join Network
-Headline:
-Join our talent network
-Text:
-Sign up and let us match you with the right opportunities
-Button:
-Join Now
-
-
-ABOUT PAGE
-Section:1 Who We Are
-Headline:
-Who we are
-Text:
-RareRoles is a talent company focused on rare and hard-to-fill tech roles.
-We help companies find the right talent, and we help professionals find better opportunities.
-
-Section: Mission
-Headline:
-Our mission
-Text:
-To help companies hire rare talent faster and help professionals grow in specialized careers
-
-Section:2 Vision
-Headline:
-Our vision
-Text:
-To become the go-to company for rare and emerging tech roles
-
-Section:3 Our Approach
-Headline:
-How we work
-Text:
-We build talent pipelines before companies need them.
-This helps companies hire faster and with less stress.
-
-
-CONTACT PAGE
-Header
-Headline:
-Contact Us
-
-Text:
-Have a role to fill or want to join our talent network?
-We would love to hear from you
-
-Form Fields:
-Name
-
-Email
-
-Company (optional)
-
-Message
-
-Button:
-Submit
-
-
-FOOTER (ALL PAGES)
-Text:
-RareRoles – Connecting companies to rare tech talent
-Links:
-Home
-
-For Companies
-
-For Talent
-
-About
-
-Contact
-
-End of Website Copy
+/**
+ * Verify email configuration
+ */
+function checkEmailConfig() {
+  Logger.log('=== EMAIL CONFIGURATION CHECK ===');
+  Logger.log('Auto-emails enabled: ' + SEND_AUTO_EMAILS);
+  Logger.log('Calendly link: ' + CALENDLY_LINK);
+  Logger.log('Company name: ' + COMPANY_NAME);
+  Logger.log('Reply-to email: ' + REPLY_TO_EMAIL);
+  Logger.log('');
+  
+  if (CALENDLY_LINK === 'https://calendly.com/your-company/consultation') {
+    Logger.log('⚠️  WARNING: You need to update CALENDLY_LINK with your actual Calendly URL!');
+  } else {
+    Logger.log('✅ Calendly link configured');
+  }
+  
+  if (REPLY_TO_EMAIL === 'hello@rareroles.com') {
+    Logger.log('⚠️  WARNING: You should update REPLY_TO_EMAIL with your actual email!');
+  } else {
+    Logger.log('✅ Reply-to email configured');
+  }
+  
+  Logger.log('');
+  Logger.log('To test email sending, run the testEmail() function.');
+  Logger.log('IMPORTANT: Update the email address in testEmail() first!');
+}

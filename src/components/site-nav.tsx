@@ -2,14 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useGetStarted } from "./get-started-modal";
-import logoWhite from "../assets/logo-white.jpg";
-import logoDark from "../assets/logo-dark-for dark background.jpg";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Us" },
-  { to: "/companies", label: "Services" },
-  { to: "/talent", label: "Why Choose Us" },
+  { to: "/services", label: "Services" },
+  { to: "/why-choose-us", label: "Why Choose Us" },
   { to: "/contact", label: "Contact Us" },
 ] as const;
 
@@ -17,9 +15,9 @@ function Mark() {
   return (
     <div className="flex items-center">
       <img
-        src={logoWhite}
+        src="/logo.jpg"
         alt="RareRoles"
-        className="h-10 w-auto object-contain md:h-11"
+        className="h-11 w-auto object-contain md:h-12"
       />
     </div>
   );
