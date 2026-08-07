@@ -91,40 +91,50 @@ export function SiteNav() {
           </button>
         </div>
 
+        {/* Mobile Menu - FIXED OVERLAY (doesn't push content) */}
         {open && (
-          <div className="mt-2 rounded-2xl border border-border bg-card p-2 shadow-soft md:hidden">
-            <div className="flex flex-col gap-1">
-              {links.map((l) => (
-                <NavLink
-                  key={l.to}
-                  to={l.to}
-                  end={l.to === "/"}
-                  onClick={() => setOpen(false)}
-                  className={({ isActive }) =>
-                    `rounded-xl px-4 py-3 font-display text-base font-semibold transition-colors ${
-                      isActive
-                        ? "bg-muted text-foreground"
-                        : "text-foreground hover:bg-muted/50"
-                    }`
-                  }
-                >
-                  {l.label}
-                </NavLink>
-              ))}
-              <div className="mt-1 p-1">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(false);
-                    openGetStarted();
-                  }}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-5 py-3 font-display text-base font-bold text-background hover:bg-accent"
-                >
-                  Get Started
-                </button>
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm md:hidden z-40 animate-in fade-in duration-200"
+              onClick={() => setOpen(false)}
+            />
+            
+            {/* Menu Panel */}
+            <div className="fixed left-0 right-0 top-20 mx-4 rounded-2xl border border-border bg-card p-2 shadow-2xl md:hidden z-50 animate-in slide-in-from-top-4 duration-300">
+              <div className="flex flex-col gap-1">
+                {links.map((l) => (
+                  <NavLink
+                    key={l.to}
+                    to={l.to}
+                    end={l.to === "/"}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `rounded-xl px-4 py-3 font-display text-base font-semibold transition-colors ${
+                        isActive
+                          ? "bg-muted text-foreground"
+                          : "text-foreground hover:bg-muted/50"
+                      }`
+                    }
+                  >
+                    {l.label}
+                  </NavLink>
+                ))}
+                <div className="mt-1 p-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      openGetStarted();
+                    }}
+                    className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-5 py-3 font-display text-base font-bold text-background hover:bg-accent transition-colors"
+                  >
+                    Get Started
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </header>

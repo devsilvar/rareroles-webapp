@@ -1,6 +1,26 @@
 -- ============================================================================
 -- RareRoles Database Setup - Complete Migration
 -- Run this script in Supabase SQL Editor to set up all required tables
+--
+-- ⚠️  SECURITY WARNING — READ BEFORE RUNNING
+--
+-- The policies below grant "TO authenticated USING (true)", which lets ANY
+-- logged-in account read every enquiry, talent submission and contact message.
+-- Migrations 005 + 006 deliberately replaced those with is_admin() checks.
+--
+-- Running this file on an existing database will SILENTLY REOPEN that hole,
+-- because the CREATE POLICY statements here overwrite the hardened ones.
+--
+-- This file is only safe for bootstrapping a BRAND NEW, EMPTY project — and
+-- even then you must immediately apply:
+--     migrations/005_create_admin_users.sql
+--     migrations/006_enforce_admin_rls.sql
+--
+-- To verify which policies are actually live:
+--     SELECT tablename, policyname, cmd, roles::TEXT,
+--            COALESCE(qual, with_check) AS predicate
+--     FROM pg_policies WHERE schemaname = 'public' ORDER BY tablename;
+-- Anything showing `true` for the authenticated role is a hole.
 -- ============================================================================
 
 -- ============================================================================

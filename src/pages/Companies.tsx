@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import type { SVGProps } from "react";
 import {
   CheckIcon,
   UsersIcon,
@@ -9,17 +8,14 @@ import {
   AcademicCapIcon,
   BoltIcon,
   ArrowUpRightIcon,
-  BuildingLibraryIcon,
-  CloudArrowUpIcon,
-  CogIcon,
-  ArrowPathIcon,
-  CpuChipIcon,
-  SparklesIcon,
-  ChartBarIcon,
 } from "@heroicons/react/24/outline";
 import { Section, Eyebrow } from "../components/ui-bits";
 import { useGetStarted } from "../components/get-started-modal";
+import { ResponsiveImage } from "../components/responsive-image";
+import { ScriptSlot } from "../components/ScriptSlot";
+import { frontierRoles } from "../constants/roles";
 import herooImg from "../assets/heroo.jpg";
+import herooWebp from "../assets/heroo.webp";
 import oraclePlsqlImg from "../assets/Oracle PLSQL Developers.jfif";
 import networkEngineerImg from "../assets/networkengineer.jfif";
 import aixAdminImg from "../assets/AIX System Administrators.jfif";
@@ -37,71 +33,9 @@ import enterpriseArchitectureImg from "../assets/enterprise-architecture.jpg";
 import blackpepImg from "../assets/blackpep.jpeg";
 import shakeeImg from "../assets/shakeee.webp";
 import telecomImg from "../assets/telecom.jpg";
+import telecomWebp from "../assets/telecom.webp";
 import fintechImg from "../assets/fintech.jpg";
-
-type FrontierRole = {
-  title: string;
-  blurb: string;
-  cta: string;
-  icon: React.ComponentType<SVGProps<SVGSVGElement>>;
-};
-
-const frontierRoles: FrontierRole[] = [
-  {
-    title: "Oracle PL/SQL Developers",
-    blurb: "",
-    cta: "",
-    icon: BuildingLibraryIcon,
-  },
-  {
-    title: "CCIE Network Engineers",
-    blurb: "",
-    cta: "",
-    icon: CloudArrowUpIcon,
-  },
-  {
-    title: "AIX System Administrators",
-    blurb: "",
-    cta: "",
-    icon: CogIcon,
-  },
-  {
-    title: "SharePoint Engineers",
-    blurb: "",
-    cta: "",
-    icon: ArrowPathIcon,
-  },
-  {
-    title: "AI / Machine Learning Engineers",
-    blurb: "",
-    cta: "",
-    icon: CpuChipIcon,
-  },
-  {
-    title: "AI Automation Engineers",
-    blurb: "",
-    cta: "",
-    icon: SparklesIcon,
-  },
-  {
-    title: "Solution Architects",
-    blurb: "",
-    cta: "",
-    icon: ChartBarIcon,
-  },
-  {
-    title: "AI Operators",
-    blurb: "",
-    cta: "",
-    icon: BoltIcon,
-  },
-  {
-    title: "AI-Enabled Software Engineers",
-    blurb: "",
-    cta: "",
-    icon: SparklesIcon,
-  },
-];
+import fintechWebp from "../assets/fintech.webp";
 
 const gains = [
   {
@@ -201,9 +135,11 @@ export default function Companies() {
       <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src={herooImg}
+          <ResponsiveImage
+            webpSrc={herooWebp}
+            fallbackSrc={herooImg}
             alt="Black professionals in tech and business"
+            priority={true}
             className="h-full w-full object-cover"
           />
           {/* Layered overlays keep the copy readable over the photo */}
@@ -594,18 +530,20 @@ export default function Companies() {
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { img: blackpepImg, name: "Banking", n: "01" },
-            { img: fintechImg, name: "Fintech", n: "02" },
-            { img: shakeeImg, name: "Consulting (Big 4)", n: "03" },
-            { img: telecomImg, name: "Telecom", n: "04" },
-            { img: enterpriseArchitectureImg, name: "Enterprise Tech", n: "05" },
+            { img: blackpepImg, webp: blackpepImg, name: "Banking", n: "01" },
+            { img: fintechImg, webp: fintechWebp, name: "Fintech", n: "02" },
+            { img: shakeeImg, webp: shakeeImg, name: "Consulting (Big 4)", n: "03" },
+            { img: telecomImg, webp: telecomWebp, name: "Telecom", n: "04" },
+            { img: enterpriseArchitectureImg, webp: enterpriseArchitectureImg, name: "Enterprise Tech", n: "05" },
           ].map((i, index) => (
             <div key={i.name} className="group relative">
               <div className="overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 <div className="relative h-64">
-                  <img
-                    src={i.img}
+                  <ResponsiveImage
+                    webpSrc={i.webp}
+                    fallbackSrc={i.img}
                     alt={i.name}
+                    loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
@@ -744,6 +682,7 @@ export default function Companies() {
           </div>
         </div>
       )}
+      <ScriptSlot id="companies-cta-after" />
     </>
   );
 }

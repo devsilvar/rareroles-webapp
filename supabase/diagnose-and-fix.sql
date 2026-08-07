@@ -1,6 +1,20 @@
 -- ============================================================================
 -- DIAGNOSTIC: Check Supabase Permissions and Policies
 -- Run this in Supabase SQL Editor to diagnose the issue
+--
+-- ⚠️  SECURITY WARNING — the "FIX" half of this file is now UNSAFE
+--
+-- The read/update policies recreated below grant "TO authenticated
+-- USING (true)", which lets ANY logged-in account read every enquiry, talent
+-- submission (including CV URLs) and contact message. Migrations 005 + 006
+-- replaced those with is_admin() checks.
+--
+-- The SELECT/diagnostic queries in this file remain safe to run.
+-- The CREATE POLICY statements DO NOT — they will silently reopen the hole.
+--
+-- If you need to restore admin access, re-apply:
+--     migrations/006_enforce_admin_rls.sql
+-- and confirm your account is present in public.admin_users.
 -- ============================================================================
 
 -- 1. Check if tables exist

@@ -14,6 +14,7 @@ import {
   Bars3Icon,
   XMarkIcon,
   EyeIcon,
+  MegaphoneIcon,
 } from "@heroicons/react/24/outline";
 import {
   Squares2X2Icon as Squares2X2IconSolid,
@@ -23,6 +24,7 @@ import {
   UserCircleIcon as UserCircleIconSolid,
   EnvelopeIcon as EnvelopeIconSolid,
   EyeIcon as EyeIconSolid,
+  MegaphoneIcon as MegaphoneIconSolid,
 } from "@heroicons/react/24/solid";
 
 interface DashboardLayoutProps {
@@ -33,12 +35,52 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children, title, subtitle }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [userEmail, setUserEmail] = useState<string>("");
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Get current user
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.email) {
+        setUserEmail(user.email);
+      }
+    };
+    getCurrentUser();
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/admin/login");
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Navigate to submissions page with search query
+      navigate(`/admin/submissions?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  // Get user initials from email
+  const getUserInitials = () => {
+    if (!userEmail) return "AD";
+    const parts = userEmail.split("@")[0].split(/[._-]/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+    return userEmail.substring(0, 2).toUpperCase();
+  };
+
+  const getUserDisplayName = () => {
+    if (!userEmail) return "Admin";
+    const name = userEmail.split("@")[0];
+    return name.split(/[._-]/).map(part => 
+      part.charAt(0).toUpperCase() + part.slice(1)
+    ).join(" ");
   };
 
   const isActive = (path: string) => location.pathname === path;
@@ -93,10 +135,18 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
       label: "Contact",
       group: "categories",
     },
+    {
+      path: "/admin/marketing",
+      icon: MegaphoneIcon,
+      iconSolid: MegaphoneIconSolid,
+      label: "Marketing",
+      group: "settings",
+    },
   ];
 
   const mainNav = navItems.filter((item) => item.group === "main");
   const categoriesNav = navItems.filter((item) => item.group === "categories");
+  const settingsNav = navItems.filter((item) => item.group === "settings");
 
   return (
     <div className="admin-page min-h-screen bg-slate-50 flex" style={{ fontFamily: 'Montserrat, sans-serif' }}>
@@ -175,6 +225,28 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
               ))}
             </div>
           </div>
+
+          {/* Settings Section */}
+          <div className="pt-4 mt-4 border-t border-slate-200/60">
+            {sidebarOpen && (
+              <p className="px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                Settings
+              </p>
+            )}
+            <div className="space-y-0.5">
+              {settingsNav.map((item) => (
+                <NavItem
+                  key={item.path}
+                  to={item.path}
+                  icon={item.icon}
+                  iconSolid={item.iconSolid}
+                  label={item.label}
+                  active={isActive(item.path)}
+                  collapsed={!sidebarOpen}
+                />
+              ))}
+            </div>
+          </div>
         </nav>
 
         {/* Logout */}
@@ -201,35 +273,82 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
               </div>
 
               <div className="flex items-center gap-2">
-                {/* Search */}
-                <div className="relative hidden md:block">
-                  <MagnifyingGlassIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+                {/* Search - Functional */}
+                <form onSubmit={handleSearch} className="relative hidden md:block">
+                  <MagnifyingGlassIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
                   <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search submissions..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-48 pl-8 pr-3 py-1.5 rounded-lg bg-slate-100 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:bg-white transition-all border border-transparent focus:border-indigo-200"
                   />
-                </div>
+                </form>
 
-                {/* Notifications */}
-                <div className="relative">
-                  <button className="p-2 rounded-lg bg-slate-100 hover:bg-indigo-50 transition-all hover:scale-105 active:scale-95 group">
-                    <BellIcon className="w-4 h-4 text-slate-600 group-hover:text-indigo-600" />
+                {/* User Profile with Dropdown - Functional */}
+                <div className="relative pl-2 ml-2 border-l border-slate-200">
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center gap-2 hover:bg-slate-50 rounded-lg px-2 py-1 transition-colors"
+                  >
+                    <div className="text-right hidden sm:block">
+                      <p className="text-xs font-bold text-slate-900">{getUserDisplayName()}</p>
+                      <p className="text-[10px] text-slate-500">{userEmail || "admin@rareroles.com"}</p>
+                    </div>
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                      {getUserInitials()}
+                    </div>
                   </button>
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-gradient-to-br from-pink-500 to-rose-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center shadow-sm">
-                    3
-                  </span>
-                </div>
 
-                {/* User Profile */}
-                <div className="flex items-center gap-2 pl-2 ml-2 border-l border-slate-200">
-                  <div className="text-right hidden sm:block">
-                    <p className="text-xs font-bold text-slate-900">Admin</p>
-                    <p className="text-[10px] text-slate-500">Administrator</p>
-                  </div>
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-xs shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                    AU
-                  </div>
+                  {/* User Dropdown Menu */}
+                  {showUserMenu && (
+                    <>
+                      {/* Backdrop to close menu */}
+                      <div 
+                        className="fixed inset-0 z-40" 
+                        onClick={() => setShowUserMenu(false)}
+                      />
+                      
+                      {/* Menu */}
+                      <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50">
+                        <div className="px-3 py-2 border-b border-slate-100">
+                          <p className="text-xs font-bold text-slate-900">{getUserDisplayName()}</p>
+                          <p className="text-[10px] text-slate-500 truncate">{userEmail}</p>
+                        </div>
+                        
+                        <Link
+                          to="/admin/overview"
+                          className="flex items-center gap-2 px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          <Squares2X2Icon className="w-4 h-4" />
+                          Dashboard
+                        </Link>
+                        
+                        <Link
+                          to="/admin/change-password"
+                          className="flex items-center gap-2 px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                          </svg>
+                          Change Password
+                        </Link>
+                        
+                        <button
+                          onClick={() => {
+                            setShowUserMenu(false);
+                            handleLogout();
+                          }}
+                          className="w-full flex items-center gap-2 px-3 py-2 text-xs text-red-600 hover:bg-red-50 transition-colors border-t border-slate-100 mt-1"
+                        >
+                          <ArrowRightOnRectangleIcon className="w-4 h-4" />
+                          Logout
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

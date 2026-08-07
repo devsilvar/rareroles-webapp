@@ -24,7 +24,7 @@ export function Hero() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           className="absolute inset-0 h-full w-full object-cover opacity-60"
           src="/hero-video.mp4"
         >
@@ -157,16 +157,41 @@ function ExclusiveBadge() {
   ];
 
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
+  const badgeRef = React.useRef<HTMLDivElement>(null);
 
+  // Pause animation when badge is not visible (scrolled past hero)
   React.useEffect(() => {
+    if (!badgeRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Pause when badge is not intersecting (scrolled past)
+          setIsPaused(!entry.isIntersecting);
+        });
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(badgeRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Rotate specialty text only when not paused
+  React.useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % specialties.length);
     }, 3000);
+    
     return () => clearInterval(interval);
-  }, [specialties.length]);
+  }, [specialties.length, isPaused]);
 
   return (
-    <div className="group relative inline-flex">
+    <div ref={badgeRef} className="group relative inline-flex">
       {/* Accent glow */}
       <div className="absolute -inset-1.5 rounded-full bg-accent/30 opacity-60 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 

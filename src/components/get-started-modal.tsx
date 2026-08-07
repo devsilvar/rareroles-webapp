@@ -17,6 +17,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useFormTracking } from "@/hooks/useAnalytics";
 import { syncHiringEnquiry, syncTalentSubmission } from "@/lib/data-sync";
+import { fireConversion } from "@/lib/marketing-scripts";
 import { uploadCV, validateFile, formatFileSize } from "@/lib/file-upload";
 
 type GetStartedContextValue = {
@@ -205,6 +206,7 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
         if (!syncResult.googleAppsScript.success) {
           console.warn('[Hiring] Partial sync - Google Apps Script failed but Supabase succeeded');
         }
+        fireConversion('hiring_enquiry', { roles: rolesList.length });
         setUploading(false);
         setView("sent");
       } else {
@@ -301,6 +303,7 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
         if (!syncResult.googleAppsScript.success) {
           console.warn('[Talent] Partial sync - Google Apps Script failed but Supabase succeeded');
         }
+        fireConversion('talent_application', { has_cv: !!cvFile });
         setUploading(false);
         setView("sent");
       } else {
@@ -569,15 +572,15 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
                                 }}
                               >
                                 <option value="">Select a role</option>
-                                <option value="Oracle PL/SQL Developer">Oracle PL/SQL Developer</option>
-                                <option value="CCIE Network Engineer">CCIE Network Engineer</option>
-                                <option value="AIX System Administrator">AIX System Administrator</option>
-                                <option value="SharePoint Engineer">SharePoint Engineer</option>
-                                <option value="AI / Machine Learning Engineer">AI / Machine Learning Engineer</option>
-                                <option value="AI Automation Engineer">AI Automation Engineer</option>
-                                <option value="Solution Architect">Solution Architect</option>
-                                <option value="AI Operator">AI Operator</option>
-                                <option value="AI-Enabled Software Engineer">AI-Enabled Software Engineer</option>
+                                <option value="Oracle PL/SQL Developers">Oracle PL/SQL Developers</option>
+                                <option value="CCIE Network Engineers">CCIE Network Engineers</option>
+                                <option value="AIX System Administrators">AIX System Administrators</option>
+                                <option value="SharePoint Engineers">SharePoint Engineers</option>
+                                <option value="AI / Machine Learning Engineers">AI / Machine Learning Engineers</option>
+                                <option value="AI Automation Engineers">AI Automation Engineers</option>
+                                <option value="Solution Architects">Solution Architects</option>
+                                <option value="AI Operators">AI Operators</option>
+                                <option value="AI-Enabled Software Engineers">AI-Enabled Software Engineers</option>
                                 <option value="Software Tester">Software Tester</option>
                                 <option value="Backend Engineer">Backend Engineer</option>
                                 <option value="Frontend Engineer">Frontend Engineer</option>
@@ -847,15 +850,15 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
                             }}
                           >
                             <option value="">Select a role</option>
-                            <option value="Oracle PL/SQL Developer">Oracle PL/SQL Developer</option>
-                            <option value="CCIE Network Engineer">CCIE Network Engineer</option>
-                            <option value="AIX System Administrator">AIX System Administrator</option>
-                            <option value="SharePoint Engineer">SharePoint Engineer</option>
-                            <option value="AI / Machine Learning Engineer">AI / Machine Learning Engineer</option>
-                            <option value="AI Automation Engineer">AI Automation Engineer</option>
-                            <option value="Solution Architect">Solution Architect</option>
-                            <option value="AI Operator">AI Operator</option>
-                            <option value="AI-Enabled Software Engineer">AI-Enabled Software Engineer</option>
+                            <option value="Oracle PL/SQL Developers">Oracle PL/SQL Developers</option>
+                            <option value="CCIE Network Engineers">CCIE Network Engineers</option>
+                            <option value="AIX System Administrators">AIX System Administrators</option>
+                            <option value="SharePoint Engineers">SharePoint Engineers</option>
+                            <option value="AI / Machine Learning Engineers">AI / Machine Learning Engineers</option>
+                            <option value="AI Automation Engineers">AI Automation Engineers</option>
+                            <option value="Solution Architects">Solution Architects</option>
+                            <option value="AI Operators">AI Operators</option>
+                            <option value="AI-Enabled Software Engineers">AI-Enabled Software Engineers</option>
                             <option value="Software Tester">Software Tester</option>
                             <option value="Backend Engineer">Backend Engineer</option>
                             <option value="Frontend Engineer">Frontend Engineer</option>

@@ -1,14 +1,19 @@
 import { useEffect } from "react";
 import { Section, Eyebrow, CTAButton } from "../components/ui-bits";
 import { useGetStarted } from "../components/get-started-modal";
+import { ResponsiveImage } from "../components/responsive-image";
+import { ScriptSlot } from "../components/ScriptSlot";
 import logoWhite from "../assets/logo-white.jpg";
 import herooImg from "../assets/heroo.jpg";
+import herooWebp from "../assets/heroo.webp";
 import blackpepImg from "../assets/blackpep.jpeg";
 import shakeeImg from "../assets/shakeee.webp";
 import aboutHeroImg from "../assets/step-shortlist.jpg";
 import hiringImg from "../assets/hiring.jpg";
+import hiringWebp from "../assets/hiring.webp";
 import missionImg from "../assets/step-brief.jpg";
 import visionImg from "../assets/vision.jpg";
+import visionWebp from "../assets/vision.webp";
 
 // Add real logos here as they're shared. Set `logo` to an imported image path
 // (e.g. `import acmeLogo from "../assets/logos/acme.svg"`) to swap the text placeholder.
@@ -159,9 +164,11 @@ export default function About() {
             <div className="relative w-full md:w-1/2 overflow-hidden h-[280px] md:h-[320px] order-first md:order-first">
               <div className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-slate-900/5 to-slate-900/60 md:to-slate-900/60 hidden md:block" />
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent block md:hidden" />
-              <img
-                src={visionImg}
+              <ResponsiveImage
+                webpSrc={visionWebp}
+                fallbackSrc={visionImg}
                 alt="Tech professionals representing our vision for talent growth"
+                loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {/* Sophisticated overlay pattern */}
@@ -264,9 +271,11 @@ export default function About() {
 
                   {/* Image with overlay */}
                   <div className="relative h-[320px] md:h-full min-h-[400px]">
-                    <img
-                      src={hiringImg}
+                    <ResponsiveImage
+                      webpSrc={hiringWebp}
+                      fallbackSrc={hiringImg}
                       alt="AI-powered recruitment process with human expertise"
+                      loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
 
@@ -556,6 +565,7 @@ export default function About() {
           </div>
         </div>
       </section>
+      <ScriptSlot id="about-content-after" />
     </>
   );
 }

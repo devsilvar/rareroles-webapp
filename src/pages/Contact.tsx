@@ -3,6 +3,8 @@ import { EnvelopeIcon, ClockIcon, MapPinIcon, PhoneIcon } from "@heroicons/react
 import { Eyebrow } from "../components/ui-bits";
 import { usePageView, useFormTracking } from "@/hooks/useAnalytics";
 import { syncContact } from "@/lib/data-sync";
+import { fireConversion } from "@/lib/marketing-scripts";
+import { ScriptSlot } from "../components/ScriptSlot";
 import contactHeroImg from "../assets/enterprise-architecture.jpg";
 
 const CONTACT_EMAIL = "hello@rareroles.com";
@@ -50,7 +52,7 @@ export default function Contact() {
           message,
           source: 'contact_form',
         });
-        
+
         if (import.meta.env.DEV) {
           console.log('[Contact] Sync result:', syncResult);
         }
@@ -59,6 +61,13 @@ export default function Contact() {
           console.warn('[Contact] Partial sync - one destination failed');
         } else if (syncResult.overall === 'failed') {
           console.error('[Contact] Complete sync failure');
+        }
+
+        // Announce to marketing tags only when the message was actually
+        // stored. Firing regardless would report conversions that never
+        // reached us, and ad spend would be optimised against a phantom.
+        if (syncResult.supabase.success) {
+          fireConversion('contact_form', { company });
         }
       } catch (syncError) {
         console.error('[Contact] Sync error:', syncError);
@@ -134,6 +143,7 @@ export default function Contact() {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* LEFT COLUMN - Form */}
           <div className="group">
+            <ScriptSlot id="contact-form-before" />
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div className="transform transition-all duration-300 hover:translate-x-1">
@@ -285,6 +295,7 @@ export default function Contact() {
                 )}
               </button>
             </form>
+            <ScriptSlot id="contact-form-after" />
 
             {/* Success Message Modal */}
             {sent && (

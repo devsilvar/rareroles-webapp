@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Section, Eyebrow, CTAButton } from "../components/ui-bits";
 import { useGetStarted } from "../components/get-started-modal";
+import { ScriptSlot } from "../components/ScriptSlot";
 import stepBriefImg from "../assets/step-brief.jpg";
 import stepShortlistImg from "../assets/step-shortlist.jpg";
 import stepHireImg from "../assets/step-hire.jpg";
@@ -873,6 +874,7 @@ export default function Talent() {
           </div>
         </div>
       )}
+      <ScriptSlot id="talent-cta-after" />
     </>
   );
 }
