@@ -74,8 +74,8 @@ export function WhatWeDoSection() {
             <div key={item.title} className="group relative">
               {/* Refined card - smaller, tighter */}
               <div className="relative overflow-hidden rounded-none border-2 border-border bg-card/95 backdrop-blur-xl px-6 py-8 shadow-lg transition-all duration-500 hover:border-accent hover:shadow-2xl hover:shadow-accent/10">
-                {/* Large beautiful icon - BIGGER as requested */}
-                <item.icon className="h-16 w-16 md:h-20 md:w-20 text-accent transition-transform duration-500 group-hover:scale-110" />
+                {/* Icon */}
+                <item.icon className="h-10 w-10 md:h-12 md:w-12 text-accent transition-transform duration-500 group-hover:scale-110" />
 
                 {/* Title - refined size */}
                 <h3 className="mt-5 font-display text-xl font-bold leading-tight tracking-tight text-foreground">
