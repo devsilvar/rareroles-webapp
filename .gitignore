@@ -36,3 +36,4 @@ dist-ssr
 # Documentation - Ignore all .md files except README.md
 *.md
 !README.md
+.env
