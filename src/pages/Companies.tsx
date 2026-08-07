@@ -13,6 +13,7 @@ import { Section, Eyebrow } from "../components/ui-bits";
 import { useGetStarted } from "../components/get-started-modal";
 import { ResponsiveImage } from "../components/responsive-image";
 import { ScriptSlot } from "../components/ScriptSlot";
+import { SEO, structuredDataSchemas } from "../components/SEO";
 import { frontierRoles } from "../constants/roles";
 import herooImg from "../assets/heroo.jpg";
 import herooWebp from "../assets/heroo.webp";
@@ -129,8 +130,38 @@ export default function Companies() {
     }
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      structuredDataSchemas.organization,
+      structuredDataSchemas.service,
+      {
+        "@type": "WebPage",
+        "@id": "https://rareroles.com/companies#webpage",
+        url: "https://rareroles.com/companies",
+        name: "Enterprise Technical Recruitment Services for Companies",
+        description:
+          "Specialized technical recruitment services including talent outsourcing, contract placements, permanent hiring, and executive search. Access pre-vetted enterprise technology talent with faster time-to-hire and reduced hiring risk.",
+        isPartOf: {
+          "@id": "https://rareroles.com/#website",
+        },
+      },
+      structuredDataSchemas.breadcrumbList([
+        { name: "Home", url: "https://rareroles.com/" },
+        { name: "For Companies", url: "https://rareroles.com/companies" },
+      ]),
+    ],
+  };
+
   return (
     <>
+      <SEO
+        title="Enterprise Technical Recruitment Services for Companies"
+        description="Specialized technical recruitment services including talent outsourcing, contract placements, permanent hiring, and executive search. Access pre-vetted enterprise technology talent with faster time-to-hire and reduced hiring risk."
+        keywords="technical recruitment services, talent outsourcing, contract placements, permanent hiring, executive search, C-suite recruitment, enterprise hiring, tech talent acquisition, recruitment process outsourcing, RPO services, fintech recruitment, banking tech recruitment, telecom recruitment"
+        structuredData={structuredData}
+        canonical="https://rareroles.com/companies"
+      />
       {/* HERO with background image */}
       <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24">
         {/* Background Image */}

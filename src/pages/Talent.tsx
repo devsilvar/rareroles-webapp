@@ -12,6 +12,7 @@ import {
 import { Section, Eyebrow, CTAButton } from "../components/ui-bits";
 import { useGetStarted } from "../components/get-started-modal";
 import { ScriptSlot } from "../components/ScriptSlot";
+import { SEO, structuredDataSchemas } from "../components/SEO";
 import stepBriefImg from "../assets/step-brief.jpg";
 import stepShortlistImg from "../assets/step-shortlist.jpg";
 import stepHireImg from "../assets/step-hire.jpg";
@@ -22,6 +23,7 @@ import herooImg from "../assets/heroo.jpg";
 import bperson2Img from "../assets/bperson (2).jpg";
 import bperson3Img from "../assets/bperson (3).jpg";
 import bperson4Img from "../assets/bperson (4).jpg";
+import semberImg from "../../public/sember adeeka.jpg";
 import shakeeImg from "../assets/shakeee.webp";
 
 // Type for tab selection
@@ -115,8 +117,63 @@ export default function Talent() {
     document.title = "Why Choose Us — For Companies & Talent | RareRoles";
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      structuredDataSchemas.organization,
+      {
+        "@type": "WebPage",
+        "@id": "https://rareroles.com/talent#webpage",
+        url: "https://rareroles.com/talent",
+        name: "Join RareRoles - Enterprise Technology Career Opportunities",
+        description:
+          "Access exclusive enterprise technology career opportunities. Join our curated talent network for AI engineering, Oracle PL/SQL, CCIE network engineering, AIX administration, SharePoint, and solution architecture roles. Higher compensation, better opportunities.",
+        isPartOf: {
+          "@id": "https://rareroles.com/#website",
+        },
+      },
+      structuredDataSchemas.breadcrumbList([
+        { name: "Home", url: "https://rareroles.com/" },
+        { name: "For Talent", url: "https://rareroles.com/talent" },
+      ]),
+      {
+        "@type": "ItemList",
+        name: "Benefits for Technology Professionals",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Access to exclusive enterprise opportunities",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Higher compensation packages",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Career guidance and support",
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: "Direct access to hiring managers",
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <SEO
+        title="Join RareRoles - Enterprise Technology Career Opportunities"
+        description="Access exclusive enterprise technology career opportunities. Join our curated talent network for AI engineering, Oracle PL/SQL, CCIE network engineering, AIX administration, SharePoint, and solution architecture roles. Higher compensation, better opportunities."
+        keywords="technology careers, AI engineer jobs, Oracle PL/SQL jobs, CCIE network engineer jobs, AIX administrator jobs, SharePoint specialist jobs, solution architect jobs, enterprise technology careers, tech job opportunities, specialized tech recruitment, contract tech roles, permanent tech positions"
+        structuredData={structuredData}
+        canonical="https://rareroles.com/talent"
+      />
       {/* HERO - Clean & Professional */}
       <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24">
         <div className="absolute inset-0">
@@ -226,9 +283,9 @@ export default function Talent() {
               <div className="relative">
                 <div className="relative h-[600px] overflow-hidden rounded-2xl shadow-2xl">
                   <img
-                    src={bperson2Img}
-                    alt="Black professional in business setting"
-                    className="w-full  object-center"
+                    src={semberImg}
+                    alt="Sember - RareRoles professional"
+                    className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent" />
                 </div>

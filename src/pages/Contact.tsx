@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { EnvelopeIcon, ClockIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/outline";
 import { Eyebrow } from "../components/ui-bits";
+import { SEO, structuredDataSchemas } from "../components/SEO";
 import { usePageView, useFormTracking } from "@/hooks/useAnalytics";
 import { syncContact } from "@/lib/data-sync";
 import { fireConversion } from "@/lib/marketing-scripts";
@@ -86,6 +87,48 @@ export default function Contact() {
 
   return (
     <>
+      <SEO
+        title="Contact RareRoles - Get in Touch"
+        description="Get in touch with RareRoles for specialized technical recruitment services. Whether you're looking to hire enterprise technology talent or seeking career opportunities, we're here to help. Located in Lagos, Nigeria."
+        keywords="contact rareroles, technical recruitment contact, hiring consultation, tech recruitment Lagos, enterprise recruitment contact, recruitment inquiry, talent acquisition contact"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            structuredDataSchemas.organization,
+            {
+              "@type": "ContactPage",
+              "@id": "https://rareroles.com/contact#webpage",
+              url: "https://rareroles.com/contact",
+              name: "Contact RareRoles - Get in Touch",
+              description:
+                "Get in touch with RareRoles for specialized technical recruitment services.",
+            },
+            {
+              "@type": "LocalBusiness",
+              name: "RareRoles",
+              telephone: CONTACT_PHONE_TEL,
+              email: CONTACT_EMAIL,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "14B Admiralty Way, Lekki Phase 1",
+                addressLocality: "Lagos",
+                addressCountry: "Nigeria",
+              },
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "09:00",
+                closes: "17:00",
+              },
+            },
+            structuredDataSchemas.breadcrumbList([
+              { name: "Home", url: "https://rareroles.com/" },
+              { name: "Contact", url: "https://rareroles.com/contact" },
+            ]),
+          ],
+        }}
+        canonical="https://rareroles.com/contact"
+      />
       {/* Hero Section with Background Image */}
       <section className="relative overflow-hidden">
         {/* Background image — young tech professionals working on laptops */}

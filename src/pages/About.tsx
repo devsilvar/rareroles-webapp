@@ -3,6 +3,7 @@ import { Section, Eyebrow, CTAButton } from "../components/ui-bits";
 import { useGetStarted } from "../components/get-started-modal";
 import { ResponsiveImage } from "../components/responsive-image";
 import { ScriptSlot } from "../components/ScriptSlot";
+import { SEO, structuredDataSchemas } from "../components/SEO";
 import logoWhite from "../assets/logo-white.jpg";
 import herooImg from "../assets/heroo.jpg";
 import herooWebp from "../assets/heroo.webp";
@@ -39,8 +40,41 @@ export default function About() {
     document.title = "About — The talent partner for rare tech roles | RareRoles";
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      structuredDataSchemas.organization,
+      {
+        "@type": "AboutPage",
+        "@id": "https://rareroles.com/about#webpage",
+        url: "https://rareroles.com/about",
+        name: "About RareRoles - Specialized Technical Recruitment Partner",
+        description:
+          "RareRoles is the specialized talent partner for hard-to-fill enterprise technology roles. We maintain warm talent pipelines for AI engineers, Oracle PL/SQL developers, CCIE network engineers, AIX administrators, and other niche technical specializations.",
+        isPartOf: {
+          "@id": "https://rareroles.com/#website",
+        },
+        about: {
+          "@type": "Organization",
+          name: "RareRoles",
+        },
+      },
+      structuredDataSchemas.breadcrumbList([
+        { name: "Home", url: "https://rareroles.com/" },
+        { name: "About", url: "https://rareroles.com/about" },
+      ]),
+    ],
+  };
+
   return (
     <>
+      <SEO
+        title="About RareRoles - Specialized Technical Recruitment Partner"
+        description="RareRoles is the specialized talent partner for hard-to-fill enterprise technology roles. We maintain warm talent pipelines for AI engineers, Oracle PL/SQL developers, CCIE network engineers, AIX administrators, and other niche technical specializations."
+        keywords="about rareroles, specialized recruitment, technical recruitment partner, enterprise technology recruitment, niche tech recruitment, talent pipeline, pre-vetted technical talent"
+        structuredData={structuredData}
+        canonical="https://rareroles.com/about"
+      />
       <section className="relative overflow-hidden">
         {/* Background image — tech team working on laptops */}
         <img
