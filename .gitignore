@@ -33,7 +33,11 @@ dist-ssr
 
 .vercel
 
-# Documentation - Ignore all .md files except README.md
+# Astro generated types
+.astro/
+
+# Documentation - Ignore all .md files except README.md and migration plan
 *.md
 !README.md
+!docs/ASTRO_MIGRATION_PLAN.md
 .env
