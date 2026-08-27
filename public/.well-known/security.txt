@@ -1,0 +1,31 @@
+# Security Contact Information for RareRoles Technologies
+# RFC 9116 compliant security.txt file
+# Last updated: 2026-08-26T22:17:00.000Z
+# Expires: 2027-08-26T22:17:00.000Z
+
+Contact: mailto:security@rarerolestechnologies.com
+Contact: mailto:hello@rarerolestechnologies.com
+
+# Preferred language for security reports
+Preferred-Languages: en
+
+# Canonical URL for this file
+Canonical: https://rarerolestechnologies.com/.well-known/security.txt
+
+# Policy and disclosure information
+Policy: https://rarerolestechnologies.com/security-policy
+
+# Acknowledgments page (optional - create this in future)
+# Acknowledgments: https://rarerolestechnologies.com/security-acknowledgments
+
+# Encryption key (optional - add PGP key if available)
+# Encryption: https://rarerolestechnologies.com/pgp-key.txt
+
+# Hiring information
+Hiring: https://rarerolestechnologies.com/talent
+
+# Additional contact methods
+Contact: https://rarerolestechnologies.com/contact
+
+# Expires timestamp (1 year from creation)
+Expires: 2027-08-26T22:17:00.000Z

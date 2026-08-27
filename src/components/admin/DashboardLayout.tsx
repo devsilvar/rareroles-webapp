@@ -44,7 +44,9 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
   // Get current user
   useEffect(() => {
     const getCurrentUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (user?.email) {
         setUserEmail(user.email);
       }
@@ -78,9 +80,10 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
   const getUserDisplayName = () => {
     if (!userEmail) return "Admin";
     const name = userEmail.split("@")[0];
-    return name.split(/[._-]/).map(part => 
-      part.charAt(0).toUpperCase() + part.slice(1)
-    ).join(" ");
+    return name
+      .split(/[._-]/)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(" ");
   };
 
   const isActive = (path: string) => location.pathname === path;
@@ -149,7 +152,10 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
   const settingsNav = navItems.filter((item) => item.group === "settings");
 
   return (
-    <div className="admin-page min-h-screen bg-slate-50 flex" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+    <div
+      className="admin-page min-h-screen bg-slate-50 flex"
+      style={{ fontFamily: "Montserrat, sans-serif" }}
+    >
       {/* Sidebar */}
       <aside
         className={`${
@@ -172,11 +178,7 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="p-1.5 rounded-lg hover:bg-white/10 transition-all text-white/90 hover:text-white"
           >
-            {sidebarOpen ? (
-              <XMarkIcon className="w-4 h-4" />
-            ) : (
-              <Bars3Icon className="w-4 h-4" />
-            )}
+            {sidebarOpen ? <XMarkIcon className="w-4 h-4" /> : <Bars3Icon className="w-4 h-4" />}
           </button>
         </div>
 
@@ -293,7 +295,9 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
                   >
                     <div className="text-right hidden sm:block">
                       <p className="text-xs font-bold text-slate-900">{getUserDisplayName()}</p>
-                      <p className="text-[10px] text-slate-500">{userEmail || "admin@rareroles.com"}</p>
+                      <p className="text-[10px] text-slate-500">
+                        {userEmail || "admin@rarerolestechnologies.com"}
+                      </p>
                     </div>
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">
                       {getUserInitials()}
@@ -304,18 +308,15 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
                   {showUserMenu && (
                     <>
                       {/* Backdrop to close menu */}
-                      <div 
-                        className="fixed inset-0 z-40" 
-                        onClick={() => setShowUserMenu(false)}
-                      />
-                      
+                      <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)} />
+
                       {/* Menu */}
                       <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50">
                         <div className="px-3 py-2 border-b border-slate-100">
                           <p className="text-xs font-bold text-slate-900">{getUserDisplayName()}</p>
                           <p className="text-[10px] text-slate-500 truncate">{userEmail}</p>
                         </div>
-                        
+
                         <Link
                           to="/admin/overview"
                           className="flex items-center gap-2 px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
@@ -324,18 +325,28 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
                           <Squares2X2Icon className="w-4 h-4" />
                           Dashboard
                         </Link>
-                        
+
                         <Link
                           to="/admin/change-password"
                           className="flex items-center gap-2 px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
                           onClick={() => setShowUserMenu(false)}
                         >
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+                            />
                           </svg>
                           Change Password
                         </Link>
-                        
+
                         <button
                           onClick={() => {
                             setShowUserMenu(false);
@@ -356,9 +367,7 @@ export default function DashboardLayout({ children, title, subtitle }: Dashboard
         </header>
 
         {/* Page Content */}
-        <div className="p-4">
-          {children}
-        </div>
+        <div className="p-4">{children}</div>
       </main>
     </div>
   );
@@ -375,8 +384,8 @@ interface NavItemProps {
 }
 
 function NavItem({ to, icon: Icon, iconSolid: IconSolid, label, active, collapsed }: NavItemProps) {
-  const ActiveIcon = active ? (IconSolid || Icon) : Icon;
-  
+  const ActiveIcon = active ? IconSolid || Icon : Icon;
+
   return (
     <Link
       to={to}
@@ -389,12 +398,12 @@ function NavItem({ to, icon: Icon, iconSolid: IconSolid, label, active, collapse
       {active && (
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-gradient-to-b from-indigo-600 to-purple-600 rounded-r-full" />
       )}
-      <div className={`shrink-0 ${active ? 'scale-110' : 'group-hover:scale-110'} transition-transform duration-200`}>
+      <div
+        className={`shrink-0 ${active ? "scale-110" : "group-hover:scale-110"} transition-transform duration-200`}
+      >
         <ActiveIcon className="w-4 h-4" />
       </div>
-      {!collapsed && (
-        <span className="text-xs font-semibold flex-1 text-left">{label}</span>
-      )}
+      {!collapsed && <span className="text-xs font-semibold flex-1 text-left">{label}</span>}
     </Link>
   );
 }

@@ -1,0 +1,371 @@
+{
+  "company": {
+    "name": "RareRoles Technologies",
+    "legal_name": "RareRoles Technologies",
+    "brand_name": "RareRoles",
+    "tagline": "Rare tech talent, on demand",
+    "founded": "2024",
+    "website": "https://rarerolestechnologies.com",
+    "industry": "Technical Recruitment & Talent Acquisition",
+    "location": {
+      "country": "Nigeria",
+      "region": "West Africa",
+      "serving": "Global"
+    }
+  },
+  "mission": "To bridge the gap between exceptional technical talent and companies that need them, focusing on rare, specialized skills that are difficult to source through traditional recruitment methods.",
+  "value_propositions": [
+    "Pre-vetted talent pipeline for rare technical skills",
+    "Faster time-to-hire - days for shortlists, weeks for placement",
+    "Deep technical screening and evaluation",
+    "Specialized in hard-to-fill enterprise technology roles",
+    "Flexible engagement models - contract, permanent, outsourced"
+  ],
+  "services": [
+    {
+      "name": "Talent Outsourcing",
+      "category": "Outsourcing",
+      "description": "End-to-end hiring process management, acting as an extension of your internal team. From sourcing and screening to shortlisting and coordination.",
+      "best_for": "Companies looking to scale hiring without building an in-house recruitment team",
+      "delivery_time": "Shortlists in 3-5 days, placements in 2-4 weeks"
+    },
+    {
+      "name": "Contract Placements",
+      "category": "Contract",
+      "description": "Flexible, short-term or project-based technical talent. Pre-vetted contract professionals who can step in quickly and deliver immediate value.",
+      "best_for": "Startups, fast-moving teams, and project-based work",
+      "delivery_time": "Shortlists in 2-3 days, starts in 1-2 weeks"
+    },
+    {
+      "name": "Permanent Hiring",
+      "category": "Permanent",
+      "description": "Long-term technical talent acquisition. Candidates who align with both technical needs and company culture.",
+      "best_for": "Building strong, stable teams for long-term success",
+      "delivery_time": "Shortlists in 5-7 days, placements in 3-6 weeks"
+    },
+    {
+      "name": "C-Suite & Executive Search",
+      "category": "Executive",
+      "description": "Senior leadership recruitment for technology organizations. C-level and VP-level technical executives.",
+      "best_for": "Organizations seeking technical leadership and strategic direction",
+      "delivery_time": "Shortlists in 2-3 weeks, placements in 4-8 weeks"
+    }
+  ],
+  "specializations": {
+    "roles": [
+      {
+        "title": "AI Engineers",
+        "category": "Artificial Intelligence",
+        "skills": [
+          "Machine Learning",
+          "Deep Learning",
+          "Neural Networks",
+          "TensorFlow",
+          "PyTorch",
+          "Model Training",
+          "AI Systems Design"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "Very High"
+      },
+      {
+        "title": "Machine Learning Engineers",
+        "category": "Artificial Intelligence",
+        "skills": [
+          "ML Algorithms",
+          "Data Pipelines",
+          "Model Deployment",
+          "MLOps",
+          "Feature Engineering",
+          "A/B Testing"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "Very High"
+      },
+      {
+        "title": "Oracle PL/SQL Developers",
+        "category": "Database Engineering",
+        "skills": [
+          "PL/SQL Programming",
+          "Oracle Database",
+          "SQL Tuning",
+          "Stored Procedures",
+          "Database Design",
+          "Performance Optimization"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "High"
+      },
+      {
+        "title": "CCIE Network Engineers",
+        "category": "Network Engineering",
+        "skills": [
+          "Cisco Certification",
+          "Network Architecture",
+          "Routing & Switching",
+          "Network Security",
+          "BGP",
+          "OSPF",
+          "SD-WAN"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "High"
+      },
+      {
+        "title": "AIX System Administrators",
+        "category": "Systems Administration",
+        "skills": [
+          "IBM AIX",
+          "UNIX Administration",
+          "Shell Scripting",
+          "System Performance Tuning",
+          "Disaster Recovery",
+          "High Availability"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "Medium-High"
+      },
+      {
+        "title": "SharePoint Specialists",
+        "category": "Enterprise Collaboration",
+        "skills": [
+          "SharePoint Development",
+          "SharePoint Administration",
+          "PowerApps",
+          "Power Automate",
+          "Office 365",
+          "Microsoft 365"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "Medium"
+      },
+      {
+        "title": "Solution Architects",
+        "category": "Enterprise Architecture",
+        "skills": [
+          "System Design",
+          "Cloud Architecture",
+          "Technical Leadership",
+          "Requirements Analysis",
+          "Integration Patterns",
+          "Technology Strategy"
+        ],
+        "typical_engagement": "Permanent or Executive",
+        "demand_level": "High"
+      },
+      {
+        "title": "AI Automation Engineers",
+        "category": "Automation & AI",
+        "skills": [
+          "Process Automation",
+          "AI Integration",
+          "RPA Tools",
+          "Workflow Design",
+          "Python",
+          "API Development"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "High"
+      },
+      {
+        "title": "AI Operators",
+        "category": "AI Operations",
+        "skills": [
+          "AI System Management",
+          "Model Monitoring",
+          "MLOps",
+          "DevOps",
+          "Cloud Platforms",
+          "Kubernetes"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "Medium-High"
+      },
+      {
+        "title": "AI-Enabled Software Engineers",
+        "category": "Software Engineering",
+        "skills": [
+          "Full-Stack Development",
+          "AI Integration",
+          "API Development",
+          "Modern Frameworks",
+          "Cloud Services",
+          "Microservices"
+        ],
+        "typical_engagement": "Contract or Permanent",
+        "demand_level": "Very High"
+      }
+    ]
+  },
+  "target_clients": {
+    "industries": [
+      "Fintech & Financial Services",
+      "Telecom Operators",
+      "Banking Institutions",
+      "Enterprise Technology Companies",
+      "Consulting Firms",
+      "Tech Startups",
+      "Healthcare Technology",
+      "E-commerce Platforms",
+      "Government & Public Sector"
+    ],
+    "company_sizes": [
+      "Startups (1-50 employees)",
+      "Scale-ups (51-200 employees)",
+      "Mid-Market (201-1000 employees)",
+      "Enterprise (1000+ employees)"
+    ],
+    "regions": [
+      "Nigeria",
+      "West Africa",
+      "Africa",
+      "Global (Remote)"
+    ]
+  },
+  "target_candidates": {
+    "experience_levels": [
+      "Mid-Level (3-5 years)",
+      "Senior (5-10 years)",
+      "Lead/Principal (10+ years)",
+      "Executive (C-Level, VP)"
+    ],
+    "work_arrangements": [
+      "Full-time employment",
+      "Contract/Freelance",
+      "Remote work",
+      "Hybrid work",
+      "On-site work"
+    ]
+  },
+  "competitive_advantages": [
+    {
+      "advantage": "Specialized Focus",
+      "description": "We exclusively focus on rare, hard-to-fill technical roles that generalist recruiters struggle with"
+    },
+    {
+      "advantage": "Pre-vetted Pipeline",
+      "description": "Warm talent pipeline maintained before client requests, not cold searching when roles open"
+    },
+    {
+      "advantage": "Technical Depth",
+      "description": "Deep technical screening by specialists who understand the technologies and can evaluate candidates properly"
+    },
+    {
+      "advantage": "Speed to Market",
+      "description": "Curated shortlists in days, not weeks. Critical roles filled in weeks, not months"
+    },
+    {
+      "advantage": "Reduced Risk",
+      "description": "Comprehensive vetting means interviews are final validation, not primary screening"
+    }
+  ],
+  "process": {
+    "steps": [
+      {
+        "step": 1,
+        "name": "Brief",
+        "description": "Understand your technical requirements, team culture, and business context",
+        "duration": "1 day"
+      },
+      {
+        "step": 2,
+        "name": "Source & Screen",
+        "description": "Activate pre-vetted pipeline and conduct technical screening",
+        "duration": "3-5 days"
+      },
+      {
+        "step": 3,
+        "name": "Shortlist",
+        "description": "Present curated candidates with detailed profiles and assessment results",
+        "duration": "1-2 days"
+      },
+      {
+        "step": 4,
+        "name": "Interview & Hire",
+        "description": "Coordinate interviews, support negotiations, and facilitate hiring",
+        "duration": "1-4 weeks"
+      }
+    ],
+    "total_time_to_hire": {
+      "contract": "1-2 weeks",
+      "permanent": "3-6 weeks",
+      "executive": "4-8 weeks"
+    }
+  },
+  "metrics": {
+    "time_to_shortlist": "3-5 days average",
+    "time_to_hire": "2-6 weeks average",
+    "candidate_quality": "Pre-vetted and technically screened",
+    "client_satisfaction": "High retention and repeat business"
+  },
+  "contact": {
+    "general": "hello@rarerolestechnologies.com",
+    "companies": "companies@rarerolestechnologies.com",
+    "talent": "talent@rarerolestechnologies.com",
+    "security": "security@rarerolestechnologies.com",
+    "website_contact_form": "https://rarerolestechnologies.com/contact"
+  },
+  "social_media": {
+    "linkedin": "https://www.linkedin.com/company/rareroles",
+    "twitter": "https://twitter.com/rareroles"
+  },
+  "technology_stack": {
+    "frontend": ["React", "TypeScript", "Vite", "TailwindCSS"],
+    "backend": ["Supabase", "PostgreSQL"],
+    "infrastructure": ["Netlify", "Cloudinary"],
+    "tools": ["Google Apps Script", "Analytics"]
+  },
+  "seo_keywords": [
+    "technical recruitment",
+    "AI engineer recruitment",
+    "Oracle PL/SQL developer hiring",
+    "CCIE network engineer recruitment",
+    "AIX administrator hiring",
+    "SharePoint specialist recruitment",
+    "solution architect hiring",
+    "tech talent acquisition",
+    "specialized recruitment",
+    "Nigeria tech recruitment",
+    "Lagos recruitment agency",
+    "enterprise recruitment",
+    "contract hiring",
+    "permanent placement",
+    "executive search technology"
+  ],
+  "faqs": [
+    {
+      "question": "What types of roles does RareRoles specialize in?",
+      "answer": "RareRoles specializes in hard-to-fill enterprise technology roles including AI Engineers, Machine Learning Engineers, Oracle PL/SQL Developers, CCIE Network Engineers, AIX System Administrators, SharePoint Specialists, Solution Architects, and other rare technical positions."
+    },
+    {
+      "question": "How quickly can RareRoles provide candidate shortlists?",
+      "answer": "We provide curated shortlists in 3-5 days for most roles, sometimes as fast as 2-3 days for contract positions. This is possible because we maintain pre-vetted talent pipelines."
+    },
+    {
+      "question": "Does RareRoles work with companies outside Nigeria?",
+      "answer": "Yes, we work with companies globally. While we're based in Nigeria, we place talent internationally and support remote work arrangements."
+    },
+    {
+      "question": "What's the difference between your services and traditional recruitment?",
+      "answer": "Unlike generalist recruiters who start searching when you post a role, we maintain warm talent pipelines for specialized roles. We also provide deep technical vetting by specialists who understand the technologies, not just keyword matching."
+    },
+    {
+      "question": "How much does RareRoles charge?",
+      "answer": "Our pricing varies based on the role type, level, and engagement model. Contact us for a customized quote. We offer competitive rates with flexible payment terms."
+    },
+    {
+      "question": "Can I hire candidates on a contract basis?",
+      "answer": "Yes, we offer contract placements for short-term projects, temporary roles, or specialized expertise. This is ideal for startups and project-based work."
+    },
+    {
+      "question": "What's your screening process?",
+      "answer": "We conduct multi-stage screening including resume review, technical assessments, skills verification, cultural fit evaluation, and reference checks. Only the top candidates make it to client shortlists."
+    },
+    {
+      "question": "Do you offer any guarantees?",
+      "answer": "Yes, we offer replacement guarantees for permanent placements. If a candidate doesn't work out within the guarantee period, we'll find a replacement at no additional cost."
+    }
+  ],
+  "last_updated": "2026-08-26",
+  "schema_version": "1.0"
+}

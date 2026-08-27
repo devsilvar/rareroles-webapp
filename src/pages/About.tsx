@@ -15,22 +15,20 @@ import hiringWebp from "../assets/hiring.webp";
 import missionImg from "../assets/step-brief.jpg";
 import visionImg from "../assets/vision.jpg";
 import visionWebp from "../assets/vision.webp";
+import cust1Img from "../assets/cust1.jpg";
+import cust2Img from "../assets/cust2.jpg";
+import cust3Img from "../assets/cust3.jpg";
+import cust4Img from "../assets/cust4.jpg";
 
 // Add real logos here as they're shared. Set `logo` to an imported image path
 // (e.g. `import acmeLogo from "../assets/logos/acme.svg"`) to swap the text placeholder.
 type CompanyLogo = { name: string; logo?: string };
 
 const companyLogos: CompanyLogo[] = [
-  { name: "Acme Corp", logo: logoWhite },
-  { name: "Northwind", logo: logoWhite },
-  { name: "Globex", logo: logoWhite },
-  { name: "Initech", logo: logoWhite },
-  { name: "Umbrella", logo: logoWhite },
-  { name: "Stark Industries", logo: logoWhite },
-  { name: "Wayne Enterprises", logo: logoWhite },
-  { name: "Soylent", logo: logoWhite },
-  { name: "Tech Corp", logo: logoWhite },
-  { name: "Digital Solutions", logo: logoWhite },
+  { name: "Customer 1", logo: cust1Img },
+  { name: "Customer 2", logo: cust2Img },
+  { name: "Customer 3", logo: cust3Img },
+  { name: "Customer 4", logo: cust4Img },
 ];
 
 export default function About() {
@@ -46,13 +44,13 @@ export default function About() {
       structuredDataSchemas.organization,
       {
         "@type": "AboutPage",
-        "@id": "https://rareroles.com/about#webpage",
-        url: "https://rareroles.com/about",
+        "@id": "https://rarerolestechnologies.com/about#webpage",
+        url: "https://rarerolestechnologies.com/about",
         name: "About RareRoles - Specialized Technical Recruitment Partner",
         description:
           "RareRoles is the specialized talent partner for hard-to-fill enterprise technology roles. We maintain warm talent pipelines for AI engineers, Oracle PL/SQL developers, CCIE network engineers, AIX administrators, and other niche technical specializations.",
         isPartOf: {
-          "@id": "https://rareroles.com/#website",
+          "@id": "https://rarerolestechnologies.com/#website",
         },
         about: {
           "@type": "Organization",
@@ -60,8 +58,8 @@ export default function About() {
         },
       },
       structuredDataSchemas.breadcrumbList([
-        { name: "Home", url: "https://rareroles.com/" },
-        { name: "About", url: "https://rareroles.com/about" },
+        { name: "Home", url: "https://rarerolestechnologies.com/" },
+        { name: "About", url: "https://rarerolestechnologies.com/about" },
       ]),
     ],
   };
@@ -73,7 +71,7 @@ export default function About() {
         description="RareRoles is the specialized talent partner for hard-to-fill enterprise technology roles. We maintain warm talent pipelines for AI engineers, Oracle PL/SQL developers, CCIE network engineers, AIX administrators, and other niche technical specializations."
         keywords="about rareroles, specialized recruitment, technical recruitment partner, enterprise technology recruitment, niche tech recruitment, talent pipeline, pre-vetted technical talent"
         structuredData={structuredData}
-        canonical="https://rareroles.com/about"
+        canonical="https://rarerolestechnologies.com/about"
       />
       <section className="relative overflow-hidden">
         {/* Background image — tech team working on laptops */}
@@ -83,9 +81,9 @@ export default function About() {
           className="absolute inset-0 h-full w-full object-cover"
         />
 
-        {/* Layered overlays keep the copy readable over the photo */}
-        <div className="absolute inset-0 bg-gradient-to-br from-ink/92 via-ink/80 to-brand-purple/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+        {/* Layered overlays - Dark purple brand tint like homepage */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a0b2e]/70 via-[#2d1b4e]/60 to-[#4a1d6f]/50" />
 
         {/* Subtle dot texture for depth */}
         <div
@@ -101,7 +99,7 @@ export default function About() {
             <Eyebrow className="[&>span]:text-white/90 [&>div]:to-white/60">About</Eyebrow>
             <h1 className="text-display mt-6 text-5xl text-white md:text-7xl lg:text-[88px]">
               A talent company built for the{" "}
-              <span className="italic text-white/70">rare stuff.</span>
+              <span className="italic text-white/70">Precision Hiring.</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg text-white/85 md:text-xl">
               RareRoles is a talent company focused on rare and hard-to-fill tech roles. We help
@@ -132,18 +130,18 @@ export default function About() {
         </div>
 
         {/* Mission & Vision */}
-        <div className="mt-24 space-y-6">
+        <div className="mt-16 sm:mt-24 space-y-6">
           {/* Mission Row - Image on Right */}
-          <div className="group relative flex flex-col md:flex-row overflow-hidden bg-white transition-all duration-500 hover:shadow-2xl">
+          <div className="group relative flex flex-col md:flex-row overflow-hidden bg-white rounded-2xl sm:rounded-none transition-all duration-500 hover:shadow-2xl shadow-sm sm:shadow-none">
             {/* Mission Content - Left */}
-            <div className="relative flex w-full md:w-1/2 flex-col justify-center px-8 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12">
+            <div className="relative flex w-full md:w-1/2 flex-col justify-center px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 lg:px-12 lg:py-12">
               {/* Minimalist decorative element */}
               <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-accent via-accent/60 to-transparent" />
 
               {/* Icon - Bigger and no background */}
-              <div className="mb-4 flex">
+              <div className="mb-3 sm:mb-4 flex">
                 <svg
-                  className="h-12 w-12 text-accent md:h-14 md:w-14"
+                  className="h-10 w-10 text-accent sm:h-12 sm:w-12 md:h-14 md:w-14"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -158,7 +156,7 @@ export default function About() {
               </div>
 
               {/* Eyebrow text */}
-              <div className="mb-3 flex items-center gap-2">
+              <div className="mb-2 sm:mb-3 flex items-center gap-2">
                 <div className="h-px w-8 bg-gradient-to-r from-accent to-transparent" />
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
                   Mission
@@ -166,20 +164,20 @@ export default function About() {
               </div>
 
               <h3
-                className="mb-4 text-2xl font-bold leading-tight tracking-tight text-slate-900 md:text-3xl"
+                className="mb-3 sm:mb-4 text-xl sm:text-2xl font-bold leading-tight tracking-tight text-slate-900 md:text-3xl"
                 style={{ fontFamily: "Montserrat, sans-serif" }}
               >
                 Our mission
               </h3>
 
-              <p className="max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
+              <p className="max-w-xl text-sm sm:text-base leading-relaxed text-slate-600 md:text-lg">
                 To help companies hire rare talent faster and help professionals grow in specialized
                 careers
               </p>
             </div>
 
             {/* Mission Image - Right */}
-            <div className="relative w-full md:w-1/2 overflow-hidden h-[280px] md:h-[320px]">
+            <div className="relative w-full md:w-1/2 overflow-hidden h-[220px] sm:h-[280px] md:h-[320px]">
               <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/5 to-white/60 md:to-white/60 hidden md:block" />
               <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent block md:hidden" />
               <img
@@ -193,9 +191,9 @@ export default function About() {
           </div>
 
           {/* Vision Row - Image on Left */}
-          <div className="group relative flex flex-col md:flex-row overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 transition-all duration-500 hover:shadow-2xl">
+          <div className="group relative flex flex-col md:flex-row overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl sm:rounded-none transition-all duration-500 hover:shadow-2xl shadow-sm sm:shadow-none">
             {/* Vision Image - Left (appears on top on mobile) */}
-            <div className="relative w-full md:w-1/2 overflow-hidden h-[280px] md:h-[320px] order-first md:order-first">
+            <div className="relative w-full md:w-1/2 overflow-hidden h-[220px] sm:h-[280px] md:h-[320px] order-first md:order-first">
               <div className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-slate-900/5 to-slate-900/60 md:to-slate-900/60 hidden md:block" />
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent block md:hidden" />
               <ResponsiveImage
@@ -210,14 +208,14 @@ export default function About() {
             </div>
 
             {/* Vision Content - Right (appears on bottom on mobile) */}
-            <div className="relative flex w-full md:w-1/2 flex-col justify-center px-8 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12 order-last md:order-last">
+            <div className="relative flex w-full md:w-1/2 flex-col justify-center px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 lg:px-12 lg:py-12 order-last md:order-last">
               {/* Minimalist decorative element */}
               <div className="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-accent via-accent/60 to-transparent" />
 
               {/* Icon - Bigger and no background */}
-              <div className="mb-4 flex">
+              <div className="mb-3 sm:mb-4 flex">
                 <svg
-                  className="h-12 w-12 text-accent md:h-14 md:w-14"
+                  className="h-10 w-10 text-accent sm:h-12 sm:w-12 md:h-14 md:w-14"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -237,7 +235,7 @@ export default function About() {
               </div>
 
               {/* Eyebrow text */}
-              <div className="mb-3 flex items-center gap-2">
+              <div className="mb-2 sm:mb-3 flex items-center gap-2">
                 <div className="h-px w-8 bg-gradient-to-r from-accent to-transparent" />
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
                   Vision
@@ -245,13 +243,13 @@ export default function About() {
               </div>
 
               <h3
-                className="mb-4 text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl"
+                className="mb-3 sm:mb-4 text-xl sm:text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl"
                 style={{ fontFamily: "Montserrat, sans-serif" }}
               >
                 Our vision
               </h3>
 
-              <p className="max-w-xl text-base leading-relaxed text-slate-300 md:text-lg">
+              <p className="max-w-xl text-sm sm:text-base leading-relaxed text-slate-300 md:text-lg">
                 To become the go-to company for rare and emerging tech roles
               </p>
             </div>
@@ -436,7 +434,7 @@ export default function About() {
           </div>
 
           {/* List */}
-          <ol className="mt-14 md:mt-20">
+          <ol className="mt-10 sm:mt-14 md:mt-20">
             {[
               "Your last search took three months — and the person you hired left within a year.",
               "Your board or investors have flagged a leadership gap that's holding back growth.",
@@ -446,14 +444,14 @@ export default function About() {
               "You want a search partner who understands your business model and what success actually looks like at your stage.",
             ].map((statement, i) => (
               <li key={i} className="group">
-                <div className="relative flex items-center gap-5 border-t border-border py-7 transition-all duration-300 hover:px-4 md:gap-8 md:py-9">
+                <div className="relative flex items-center gap-3.5 sm:gap-5 md:gap-8 border-t border-border py-4 sm:py-6 md:py-9 transition-all duration-300 hover:px-2 sm:hover:px-4">
                   {/* Index */}
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border-strong bg-white font-mono text-xs font-semibold tracking-widest text-ink-muted transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-white md:h-11 md:w-11 md:text-sm">
+                  <span className="flex h-8 w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-full border border-border-strong bg-white font-mono text-[11px] sm:text-xs md:text-sm font-semibold tracking-widest text-ink-muted transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-white">
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
                   {/* Statement */}
-                  <p className="max-w-3xl text-lg font-medium leading-snug text-foreground/85 transition-colors duration-300 group-hover:text-foreground md:text-xl lg:text-2xl">
+                  <p className="max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-snug text-foreground/85 transition-colors duration-300 group-hover:text-foreground">
                     {statement}
                   </p>
 
@@ -463,7 +461,6 @@ export default function About() {
               </li>
             ))}
           </ol>
-          
         </div>
       </Section>
 
@@ -476,9 +473,9 @@ export default function About() {
             backgroundImage: `url(${new URL("../assets/team-meeting.jpg", import.meta.url).href})`,
           }}
         >
-          {/* Multi-Layer Overlay for Professional Depth */}
-          <div className="absolute inset-0 bg-ink/85" />
-          <div className="absolute inset-0 bg-gradient-to-br from-ink/90 via-ink/80 to-accent/20" />
+          {/* Multi-Layer Overlay - Dark purple brand tint like homepage */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/75" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a0b2e]/75 via-[#2d1b4e]/65 to-[#4a1d6f]/55" />
 
           {/* Subtle Noise Texture */}
           <div
@@ -493,7 +490,7 @@ export default function About() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 py-24 md:py-32 lg:py-20">
+        <div className="relative z-10 py-16 sm:py-24 md:py-32 lg:py-20">
           <div className="container-page">
             <div className="mx-auto max-w-4xl text-center">
               {/* Eyebrow */}
@@ -502,22 +499,22 @@ export default function About() {
               </Eyebrow>
 
               {/* Main Heading */}
-              <h2 className="text-display mt-8 text-4xl font-bold text-white md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight">
+              <h2 className="text-display mt-6 sm:mt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight">
                 Ready to{" "}
                 <span className="relative inline-block">
                   <span className="relative z-10 italic text-rare">talk?</span>
-                  <span className="absolute bottom-1 left-0 right-0 h-3 bg-rare/20 -z-0 md:h-4" />
+                  <span className="absolute bottom-1 left-0 right-0 h-2 sm:h-3 bg-rare/20 -z-0 md:h-4" />
                 </span>
               </h2>
 
               {/* Supporting Copy */}
-              <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl lg:text-2xl">
+              <p className="mx-auto mt-4 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90">
                 If this resonates, let's have a conversation about what you're building and how we
                 can help.
               </p>
 
               {/* CTA Button */}
-              <div className="mt-12 flex flex-wrap justify-center gap-4 md:gap-5">
+              <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-4 md:gap-5">
                 <CTAButton
                   to="/contact"
                   classes="shadow-2xl shadow-accent/20 hover:shadow-accent/30 transition-shadow duration-300"
@@ -530,43 +527,43 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-t border-border pb-24 pt-24 md:pb-32 md:pt-32">
+      <section className="border-t border-border pb-16 pt-16 sm:pb-24 sm:pt-24 md:pb-32 md:pt-32">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
             <Eyebrow>Trusted by</Eyebrow>
-            <h2 className="text-display mt-6 text-4xl text-foreground md:text-5xl">
+            <h2 className="text-display mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-5xl text-foreground">
               Companies we work with
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
+            <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-ink-muted">
               From fast-scaling startups to enterprise teams, organizations trust us to fill their
               hardest technical roles.
             </p>
           </div>
 
           {/* Infinite Marquee Animation */}
-          <div className="relative mt-16 overflow-hidden">
+          <div className="relative mt-10 sm:mt-16 overflow-hidden">
             {/* Gradient masks on edges */}
-            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent" />
-            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent" />
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 sm:w-32 bg-gradient-to-r from-background to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 sm:w-32 bg-gradient-to-l from-background to-transparent" />
 
             {/* Marquee container */}
             <div className="flex">
               {/* First set of logos */}
-              <div className="flex shrink-0 animate-marquee items-center justify-around gap-16 pr-16">
+              <div className="flex shrink-0 animate-marquee sm:animate-marquee-fast items-center justify-around gap-12 sm:gap-16 md:gap-24 pr-12 sm:pr-16 md:pr-24">
                 {companyLogos.map((company, index) => (
                   <div
                     key={`first-${index}`}
-                    className="flex h-20 w-32 shrink-0 items-center justify-center"
+                    className="flex h-24 sm:h-32 md:h-40 w-36 sm:w-48 md:w-56 shrink-0 items-center justify-center"
                     title={company.name}
                   >
                     {company.logo ? (
                       <img
                         src={company.logo}
                         alt={company.name}
-                        className="h-12 w-auto object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 md:h-14"
+                        className="h-20 sm:h-28 md:h-36 w-auto object-contain opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
                       />
                     ) : (
-                      <span className="text-base font-semibold text-ink-muted">{company.name}</span>
+                      <span className="text-base sm:text-lg md:text-xl font-semibold text-ink-muted">{company.name}</span>
                     )}
                   </div>
                 ))}
@@ -574,23 +571,23 @@ export default function About() {
 
               {/* Duplicate set for seamless loop */}
               <div
-                className="flex shrink-0 animate-marquee items-center justify-around gap-16 pr-16"
+                className="flex shrink-0 animate-marquee sm:animate-marquee-fast items-center justify-around gap-12 sm:gap-16 md:gap-24 pr-12 sm:pr-16 md:pr-24"
                 aria-hidden="true"
               >
                 {companyLogos.map((company, index) => (
                   <div
                     key={`second-${index}`}
-                    className="flex h-20 w-32 shrink-0 items-center justify-center"
+                    className="flex h-24 sm:h-32 md:h-40 w-36 sm:w-48 md:w-56 shrink-0 items-center justify-center"
                     title={company.name}
                   >
                     {company.logo ? (
                       <img
                         src={company.logo}
                         alt={company.name}
-                        className="h-12 w-auto object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 md:h-14"
+                        className="h-20 sm:h-28 md:h-36 w-auto object-contain opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
                       />
                     ) : (
-                      <span className="text-base font-semibold text-ink-muted">{company.name}</span>
+                      <span className="text-base sm:text-lg md:text-xl font-semibold text-ink-muted">{company.name}</span>
                     )}
                   </div>
                 ))}

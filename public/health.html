@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RareRoles Health Check</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .status {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .healthy { color: #10b981; }
+    .unhealthy { color: #ef4444; }
+    .loading { color: #6b7280; }
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 5px 0;
+      background: #f9fafb;
+      border-radius: 5px;
+    }
+    .timestamp {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="status">
+    <h1>RareRoles Health Check</h1>
+    <div id="status-container">
+      <p class="loading">⏳ Checking system status...</p>
+    </div>
+  </div>
+
+  <script>
+    // Your Supabase configuration
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE'; // Replace with your actual URL
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE'; // Replace with your actual key
+
+    async function checkHealth() {
+      const startTime = Date.now();
+      const container = document.getElementById('status-container');
+
+      try {
+        // Test 1: Website is accessible (already passed if you see this)
+        const appCheck = {
+          status: 'up',
+          message: 'Website is accessible',
+        };
+
+        // Test 2: Check Supabase database
+        const dbCheckStart = Date.now();
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/talent_submissions?select=id&limit=1`, {
+          method: 'HEAD',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+        });
+        const dbLatency = Date.now() - dbCheckStart;
+
+        const dbCheck = {
+          status: response.ok ? 'up' : 'down',
+          latency: dbLatency,
+          message: response.ok ? 'Database is accessible' : 'Database connection failed',
+        };
+
+        const totalLatency = Date.now() - startTime;
+        const overallStatus = appCheck.status === 'up' && dbCheck.status === 'up' ? 'healthy' : 'unhealthy';
+
+        // Display results
+        container.innerHTML = `
+          <h2 class="${overallStatus}">
+            ${overallStatus === 'healthy' ? '✅ All Systems Operational' : '⚠️ System Issues Detected'}
+          </h2>
+          
+          <div class="metric">
+            <span><strong>Overall Status:</strong></span>
+            <span class="${overallStatus}">${overallStatus.toUpperCase()}</span>
+          </div>
+          
+          <div class="metric">
+            <span><strong>Website:</strong></span>
+            <span class="healthy">${appCheck.status.toUpperCase()} (${appCheck.message})</span>
+          </div>
+          
+          <div class="metric">
+            <span><strong>Database:</strong></span>
+            <span class="${dbCheck.status === 'up' ? 'healthy' : 'unhealthy'}">
+              ${dbCheck.status.toUpperCase()} (${dbCheck.latency}ms)
+            </span>
+          </div>
+          
+          <div class="metric">
+            <span><strong>Response Time:</strong></span>
+            <span>${totalLatency}ms</span>
+          </div>
+          
+          <div class="timestamp">
+            Last checked: ${new Date().toLocaleString()}
+            <br>
+            <button onclick="checkHealth()" style="margin-top: 10px; padding: 5px 15px; cursor: pointer;">
+              Refresh Check
+            </button>
+          </div>
+        `;
+
+        // Return JSON for UptimeRobot (when accessed programmatically)
+        if (window.location.search.includes('format=json')) {
+          document.body.innerHTML = `<pre>${JSON.stringify({
+            status: overallStatus,
+            timestamp: new Date().toISOString(),
+            checks: {
+              application: appCheck,
+              database: dbCheck,
+            },
+            totalLatency,
+          }, null, 2)}</pre>`;
+        }
+
+      } catch (error) {
+        container.innerHTML = `
+          <h2 class="unhealthy">❌ Health Check Failed</h2>
+          <div class="metric">
+            <span><strong>Error:</strong></span>
+            <span class="unhealthy">${error.message}</span>
+          </div>
+          <div class="timestamp">
+            Last checked: ${new Date().toLocaleString()}
+            <br>
+            <button onclick="checkHealth()" style="margin-top: 10px; padding: 5px 15px; cursor: pointer;">
+              Retry Check
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    // Run check on page load
+    checkHealth();
+
+    // Auto-refresh every 60 seconds
+    setInterval(checkHealth, 60000);
+  </script>
+</body>
+</html>

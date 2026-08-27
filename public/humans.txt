@@ -1,0 +1,123 @@
+/* TEAM */
+
+Company: RareRoles Technologies
+Site: https://rarerolestechnologies.com
+Location: Nigeria
+Industry: Technical Recruitment & Talent Acquisition
+
+/* ABOUT */
+
+We are RareRoles — a specialized technical recruitment partner focused on hard-to-fill enterprise technology roles.
+
+Mission: To bridge the gap between exceptional technical talent and companies that need them, focusing on rare, specialized skills that are difficult to source through traditional recruitment methods.
+
+Our Story: Founded in 2024, RareRoles was born from a simple observation — the most critical technical roles take the longest to fill. Companies waste months searching for Oracle PL/SQL developers, CCIE network engineers, AIX administrators, and AI specialists. We built RareRoles to solve this problem with a pre-vetted talent pipeline, deep technical screening, and specialized industry expertise.
+
+/* WHAT WE DO */
+
+Services:
+- Talent Outsourcing (End-to-end hiring process management)
+- Contract Placements (Flexible, project-based technical talent)
+- Permanent Hiring (Long-term technical talent acquisition)
+- C-Suite & Executive Search (Senior leadership recruitment)
+
+Specializations:
+- AI Engineers & Machine Learning Engineers
+- Oracle PL/SQL Developers
+- CCIE Network Engineers
+- AIX System Administrators
+- SharePoint Specialists
+- Solution Architects
+- AI Automation Engineers
+- AI-Enabled Software Engineers
+- AI Operators
+
+Target Clients:
+- Enterprise Technology Companies
+- Fintech & Financial Services
+- Telecom Operators
+- Banking Institutions
+- Consulting Firms
+- Tech Startups
+
+/* WHY WE'RE DIFFERENT */
+
+1. Pre-vetted Talent Pipeline
+   Not a cold search — we maintain warm pipelines built long before you ask.
+
+2. Faster Time-to-Hire
+   Curated shortlists in days. Fill critical seats in weeks, not months.
+
+3. Deep Technical Vetting
+   Our screening ensures the interview is the last filter, not the first.
+
+4. Specialized Expertise
+   We focus exclusively on rare, hard-to-find technical skills.
+
+5. Flexible Engagement Models
+   Contract, permanent, outsourced — we adapt to your needs.
+
+/* VALUE PROPOSITIONS */
+
+For Companies:
+- Access to pre-vetted, specialized technical talent
+- Reduced time-to-hire for critical roles
+- Lower hiring risk through comprehensive vetting
+- Dedicated support for hard-to-fill positions
+- Flexible hiring models (contract, permanent, outsourced)
+
+For Talent:
+- Access to exclusive, specialized roles
+- Career advancement opportunities
+- Direct connection to hiring companies
+- Professional development support
+- Transparent, respectful recruitment process
+
+/* TECH STACK */
+
+Frontend: React, TypeScript, Vite, TailwindCSS
+Backend: Supabase (PostgreSQL, Authentication, Storage)
+Infrastructure: Netlify, Cloudinary
+Tools: Google Apps Script, Analytics
+
+/* CONTACT */
+
+General Inquiries: hello@rarerolestechnologies.com
+Companies/Hiring: companies@rarerolestechnologies.com
+Talent/Candidates: talent@rarerolestechnologies.com
+Security: security@rarerolestechnologies.com
+
+Website: https://rarerolestechnologies.com
+LinkedIn: https://www.linkedin.com/company/rareroles
+Twitter: https://twitter.com/rareroles
+
+/* SITE */
+
+Last update: 2026-08-26
+Standards: HTML5, CSS3, ES2024
+Components: Accessible, Responsive, Performance-optimized
+SEO: Comprehensive meta tags, structured data, sitemaps
+Analytics: Privacy-focused visitor tracking
+
+/* THANKS */
+
+To all the technical professionals who trust us with their careers.
+To all the companies who partner with us to build exceptional teams.
+To the open-source community that powers our technology stack.
+
+/* RECRUITMENT PHILOSOPHY */
+
+We believe great technical recruitment is about more than matching keywords on a resume. It's about understanding:
+- The technical depth required for specialized roles
+- The cultural fit that makes teams thrive
+- The career trajectory that motivates candidates
+- The business context that drives hiring decisions
+
+Quality over quantity. Specialization over generalization. Partnership over transactions.
+
+That's the RareRoles way.
+
+---
+
+Built with care in Nigeria 🇳🇬
+Making technical recruitment less painful, one placement at a time.

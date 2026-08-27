@@ -20,7 +20,7 @@ export function SEO({
   title,
   description,
   keywords,
-  ogImage = "https://rareroles.com/og-image.jpg",
+  ogImage = "https://rarerolestechnologies.com/og-image.jpg",
   ogType = "website",
   canonical,
   noindex = false,
@@ -28,7 +28,7 @@ export function SEO({
 }: SEOProps) {
   const location = useLocation();
   const fullTitle = `${title} | RareRoles`;
-  const url = canonical || `https://rareroles.com${location.pathname}`;
+  const url = canonical || `https://rarerolestechnologies.com${location.pathname}`;
 
   useEffect(() => {
     // Update document title
@@ -90,7 +90,7 @@ export function SEO({
     // Structured Data (JSON-LD)
     if (structuredData) {
       let scriptTag = document.querySelector('script[type="application/ld+json"]');
-      
+
       if (!scriptTag) {
         scriptTag = document.createElement("script");
         scriptTag.type = "application/ld+json";
@@ -119,12 +119,9 @@ export const structuredDataSchemas = {
     name: "RareRoles",
     description:
       "Specialized talent partner for hard-to-fill enterprise technology roles including AI engineers, Oracle PL/SQL developers, CCIE network engineers, and solution architects.",
-    url: "https://rareroles.com",
-    logo: "https://rareroles.com/logo.png",
-    sameAs: [
-      "https://www.linkedin.com/company/rareroles",
-      "https://twitter.com/rareroles",
-    ],
+    url: "https://rarerolestechnologies.com",
+    logo: "https://rarerolestechnologies.com/logo.jpg",
+    sameAs: ["https://www.linkedin.com/company/rareroles", "https://twitter.com/rareroles"],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+234-XXX-XXX-XXXX",
@@ -137,10 +134,10 @@ export const structuredDataSchemas = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "RareRoles",
-    url: "https://rareroles.com",
+    url: "https://rarerolestechnologies.com",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://rareroles.com/search?q={search_term_string}",
+      target: "https://rarerolestechnologies.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   },
@@ -152,7 +149,7 @@ export const structuredDataSchemas = {
     provider: {
       "@type": "Organization",
       name: "RareRoles",
-      url: "https://rareroles.com",
+      url: "https://rarerolestechnologies.com",
     },
     areaServed: {
       "@type": "Country",
@@ -176,8 +173,7 @@ export const structuredDataSchemas = {
           itemOffered: {
             "@type": "Service",
             name: "Contract Placements",
-            description:
-              "Flexible, project-based technical talent for short-term engagements.",
+            description: "Flexible, project-based technical talent for short-term engagements.",
           },
         },
         {
@@ -194,8 +190,7 @@ export const structuredDataSchemas = {
           itemOffered: {
             "@type": "Service",
             name: "Executive Search",
-            description:
-              "C-suite and senior leadership recruitment for technology organizations.",
+            description: "C-suite and senior leadership recruitment for technology organizations.",
           },
         },
       ],

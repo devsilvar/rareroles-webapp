@@ -24,7 +24,8 @@ export function Hero() {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="none"
+          poster="/heroo.webp"
           className="absolute inset-0 h-full w-full object-cover opacity-60"
           src="/hero-video.mp4"
         >

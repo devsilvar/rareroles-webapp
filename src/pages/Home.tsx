@@ -16,13 +16,13 @@ export default function Home() {
       structuredDataSchemas.service,
       {
         "@type": "WebPage",
-        "@id": "https://rareroles.com/#webpage",
-        url: "https://rareroles.com/",
+        "@id": "https://rarerolestechnologies.com/#webpage",
+        url: "https://rarerolestechnologies.com/",
         name: "RareRoles — Rare Tech Talent, On Demand",
         description:
           "Specialized technical recruitment partner for hard-to-fill enterprise roles. Access pre-vetted AI engineers, Oracle PL/SQL developers, CCIE network engineers, AIX administrators, SharePoint specialists, and solution architects. Faster hiring, better candidates, reduced costs.",
         isPartOf: {
-          "@id": "https://rareroles.com/#website",
+          "@id": "https://rarerolestechnologies.com/#website",
         },
         about: {
           "@type": "Thing",
@@ -30,7 +30,7 @@ export default function Home() {
         },
         primaryImageOfPage: {
           "@type": "ImageObject",
-          url: "https://rareroles.com/og-image.jpg",
+          url: "https://rarerolestechnologies.com/og-image.jpg",
         },
       },
     ],

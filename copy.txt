@@ -590,7 +590,7 @@ function checkEmailConfig() {
     Logger.log('✅ Calendly link configured');
   }
   
-  if (REPLY_TO_EMAIL === 'hello@rareroles.com') {
+  if (REPLY_TO_EMAIL === 'hello@rarerolestechnologies.com') {
     Logger.log('⚠️  WARNING: You should update REPLY_TO_EMAIL with your actual email!');
   } else {
     Logger.log('✅ Reply-to email configured');

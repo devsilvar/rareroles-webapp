@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RareRoles Keep-Alive</title>
+</head>
+<body>
+  <h1>OK</h1>
+  
+  <script>
+    // Lightweight keep-alive ping for Supabase
+    // This keeps your Supabase project active (prevents 7-day pause on free tier)
+    
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE'; // Replace with your actual URL
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE'; // Replace with your actual key
+
+    // Quick ping to Supabase (prevents project pausing)
+    fetch(`${SUPABASE_URL}/rest/v1/`, {
+      method: 'HEAD',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+    }).catch(() => {});
+
+    // Return simple response for monitoring tools
+    document.body.innerHTML = 'OK';
+  </script>
+</body>
+</html>

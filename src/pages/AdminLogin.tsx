@@ -62,7 +62,10 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8f8fc] via-[#faf9fd] to-[#f8f8fc]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+    <div
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8f8fc] via-[#faf9fd] to-[#f8f8fc]"
+      style={{ fontFamily: "Montserrat, sans-serif" }}
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#ec4899]/5 rounded-full blur-3xl" />
@@ -102,7 +105,7 @@ export default function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="admin@rareroles.com"
+                placeholder="admin@rarerolestechnologies.com"
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-[#1e1b4b] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ec4899] focus:border-transparent transition-all"
               />
             </div>
@@ -127,11 +130,7 @@ export default function AdminLogin() {
                   className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-[#1e1b4b] transition-colors"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
-                  ) : (
-                    <Eye className="w-5 h-5" />
-                  )}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
@@ -188,7 +187,7 @@ export default function AdminLogin() {
       {showForgotPassword && (
         <>
           {/* Backdrop */}
-          <div 
+          <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 animate-in fade-in duration-200"
             onClick={() => {
               setShowForgotPassword(false);
@@ -196,10 +195,10 @@ export default function AdminLogin() {
               setResetSuccess(false);
             }}
           />
-          
+
           {/* Modal */}
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div 
+            <div
               className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 animate-in zoom-in-95 duration-200"
               onClick={(e) => e.stopPropagation()}
             >
@@ -213,7 +212,12 @@ export default function AdminLogin() {
                 className="absolute right-4 top-4 p-2 text-gray-400 hover:text-gray-600 transition-colors rounded-lg hover:bg-gray-100"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
 
@@ -225,9 +229,7 @@ export default function AdminLogin() {
               </div>
 
               {/* Title */}
-              <h2 className="text-2xl font-bold text-[#1e1b4b] text-center mb-2">
-                Reset Password
-              </h2>
+              <h2 className="text-2xl font-bold text-[#1e1b4b] text-center mb-2">Reset Password</h2>
               <p className="text-sm text-gray-500 text-center mb-6">
                 Enter your email and we'll send you a link to reset your password
               </p>
@@ -260,7 +262,10 @@ export default function AdminLogin() {
               {!resetSuccess && (
                 <form onSubmit={handleForgotPassword} className="space-y-5">
                   <div>
-                    <label htmlFor="reset-email" className="block text-sm font-semibold text-[#1e1b4b] mb-2">
+                    <label
+                      htmlFor="reset-email"
+                      className="block text-sm font-semibold text-[#1e1b4b] mb-2"
+                    >
                       Email Address
                     </label>
                     <input
@@ -269,7 +274,7 @@ export default function AdminLogin() {
                       value={resetEmail}
                       onChange={(e) => setResetEmail(e.target.value)}
                       required
-                      placeholder="admin@rareroles.com"
+                      placeholder="admin@rarerolestechnologies.com"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-[#1e1b4b] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ec4899] focus:border-transparent transition-all"
                     />
                   </div>

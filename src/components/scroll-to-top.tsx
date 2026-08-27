@@ -16,12 +16,16 @@ export function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Scroll to top on route change
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant", // Instant for immediate page load feel
+    // Schedule scroll on next animation frame to prevent layout thrashing
+    const rafId = requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
     });
+
+    return () => cancelAnimationFrame(rafId);
   }, [pathname]);
 
   return null; // This component renders nothing

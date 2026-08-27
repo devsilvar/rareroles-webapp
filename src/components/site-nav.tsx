@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useGetStarted } from "./get-started-modal";
+import { prefetchRoute } from "@/lib/route-prefetch";
 
 const links = [
   { to: "/", label: "Home" },
@@ -36,7 +37,12 @@ export function SiteNav() {
       <div className="container-page">
         <div className="flex items-center justify-between gap-4 rounded-full border border-border bg-card/90 px-3 py-2 shadow-soft backdrop-blur-xl md:px-4 md:py-2.5">
           {/* Left: brand */}
-          <Link to="/" className="pl-1 text-foreground md:pl-2">
+          <Link
+            to="/"
+            onMouseEnter={() => prefetchRoute("/")}
+            onTouchStart={() => prefetchRoute("/")}
+            className="pl-1 text-foreground md:pl-2"
+          >
             <Mark />
           </Link>
 
@@ -47,6 +53,8 @@ export function SiteNav() {
                 key={l.to}
                 to={l.to}
                 end={l.to === "/"}
+                onMouseEnter={() => prefetchRoute(l.to)}
+                onTouchStart={() => prefetchRoute(l.to)}
                 className={({ isActive }) =>
                   `group relative px-5 py-2.5 font-display text-base font-semibold tracking-tight transition-colors hover:text-foreground ${
                     isActive ? "text-foreground" : "text-foreground/70"
@@ -108,6 +116,8 @@ export function SiteNav() {
                     key={l.to}
                     to={l.to}
                     end={l.to === "/"}
+                    onMouseEnter={() => prefetchRoute(l.to)}
+                    onTouchStart={() => prefetchRoute(l.to)}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
                       `rounded-xl px-4 py-3 font-display text-base font-semibold transition-colors ${

@@ -156,8 +156,12 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
   const handleHiringSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (uploading) return; // Prevent double submission
+    if (uploading) {
+      console.log('[Hiring] Already uploading, preventing double submission');
+      return;
+    }
     
+    console.log('[Hiring] Starting submission...');
     setUploading(true);
     
     const data = new FormData(e.currentTarget);
@@ -182,8 +186,10 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
     // Track form submission
     trackFormSubmit('hiring_form', { company, email, roles: rolesList.length });
 
-    // Dual-write to Supabase + Google Apps Script
+    // Dual-write to Supabase + Google Apps Script - MUST wait for completion
     try {
+      console.log('[Hiring] Calling syncHiringEnquiry...');
+      
       const syncResult = await syncHiringEnquiry({
         company,
         contact_name: name,
@@ -196,28 +202,25 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
         details,
       });
       
-      if (import.meta.env.DEV) {
-        console.log('[Hiring] Sync result:', syncResult);
-      }
-
-      // Only show success if Supabase succeeded (primary data store)
-      if (syncResult.supabase.success) {
-        // Show warning if Google Apps Script failed
-        if (!syncResult.googleAppsScript.success) {
-          console.warn('[Hiring] Partial sync - Google Apps Script failed but Supabase succeeded');
-        }
+      console.log('[Hiring] Sync completed:', syncResult);
+      
+      // Only show success if BOTH APIs succeeded
+      if (syncResult.supabase.success && syncResult.googleAppsScript.success) {
+        console.log('[Hiring] Both APIs succeeded - showing success modal');
         fireConversion('hiring_enquiry', { roles: rolesList.length });
-        setUploading(false);
         setView("sent");
+      } else if (syncResult.supabase.success && !syncResult.googleAppsScript.success) {
+        console.error('[Hiring] Partial sync - Google Apps Script failed:', syncResult.googleAppsScript.error);
+        alert(`Submission partially failed: Data saved but email notification failed. Our team will still contact you. Error: ${syncResult.googleAppsScript.error || 'Email service error'}`);
       } else {
-        // Supabase failed - show error
-        console.error('[Hiring] Supabase sync failed:', syncResult.supabase.error);
-        alert(`Submission failed: ${syncResult.supabase.error || 'Unable to save your request. Please try again.'}`);
-        setUploading(false);
+        console.error('[Hiring] Complete sync failed - Supabase:', syncResult.supabase.error, 'Google:', syncResult.googleAppsScript.error);
+        alert(`Submission failed: ${syncResult.supabase.error || syncResult.googleAppsScript.error || 'Unable to save your request. Please try again.'}`);
       }
     } catch (error) {
       console.error('[Hiring] Sync error:', error);
       alert('Submission failed: An unexpected error occurred. Please try again.');
+    } finally {
+      console.log('[Hiring] Finally block - stopping upload spinner');
       setUploading(false);
     }
   };
@@ -297,19 +300,21 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
         console.log('[Talent] Sync result:', syncResult);
       }
 
-      // Only show success if Supabase succeeded (primary data store)
-      if (syncResult.supabase.success) {
-        // Show warning if Google Apps Script failed
-        if (!syncResult.googleAppsScript.success) {
-          console.warn('[Talent] Partial sync - Google Apps Script failed but Supabase succeeded');
-        }
+      // Only show success if BOTH APIs succeeded
+      if (syncResult.supabase.success && syncResult.googleAppsScript.success) {
+        // Both succeeded - show success
         fireConversion('talent_application', { has_cv: !!cvFile });
         setUploading(false);
         setView("sent");
+      } else if (syncResult.supabase.success && !syncResult.googleAppsScript.success) {
+        // Partial success - Supabase worked but Google Apps Script failed
+        console.error('[Talent] Partial sync - Google Apps Script failed:', syncResult.googleAppsScript.error);
+        alert(`Submission partially failed: Profile saved but email notification failed. Our team will still contact you. Error: ${syncResult.googleAppsScript.error || 'Email service error'}`);
+        setUploading(false);
       } else {
-        // Supabase failed - show error
-        console.error('[Talent] Supabase sync failed:', syncResult.supabase.error);
-        alert(`Submission failed: ${syncResult.supabase.error || 'Unable to save your profile. Please try again.'}`);
+        // Complete failure
+        console.error('[Talent] Complete sync failed - Supabase:', syncResult.supabase.error, 'Google:', syncResult.googleAppsScript.error);
+        alert(`Submission failed: ${syncResult.supabase.error || syncResult.googleAppsScript.error || 'Unable to save your profile. Please try again.'}`);
         setUploading(false);
       }
     } catch (error) {
@@ -1043,30 +1048,41 @@ export function GetStartedProvider({ children }: { children: ReactNode }) {
               )}
 
               {view === "sent" && (
-                <div className="p-8">
-                  <div className="mb-6 flex items-start justify-between">
-                    <h2 className="text-xl font-bold text-slate-900">All Done!</h2>
-                    <Dialog.Close
-                      className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-600 transition-colors duration-200 hover:bg-white hover:text-slate-900 focus-visible:outline-none"
-                      aria-label="Close"
-                    >
-                      <XMarkIcon className="h-5 w-5" />
-                    </Dialog.Close>
+                <div className="relative bg-white p-10">
+                  {/* Close Button */}
+                  <Dialog.Close
+                    className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+                    aria-label="Close"
+                  >
+                    <XMarkIcon className="h-5 w-5" />
+                  </Dialog.Close>
+
+                  {/* Success Icon */}
+                  <div className="flex justify-center mb-6">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100">
+                      <CheckIcon className="h-10 w-10 text-emerald-600" strokeWidth={2.5} />
+                    </div>
                   </div>
 
-                  <div className="flex flex-col items-center py-6 text-center">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
-                      <CheckIcon className="h-8 w-8 text-green-500" strokeWidth={2.5} />
-                    </div>
-                    <p className="mt-5 text-sm leading-relaxed text-slate-600">
-                      Thanks! A member of our team will reach out to you soon.
+                  {/* Content */}
+                  <div className="text-center space-y-4">
+                    <h2 className="text-2xl font-bold text-slate-900">
+                      Submission Received
+                    </h2>
+                    
+                    <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+                      We've sent a confirmation email. <strong>Check your spam folder</strong> if you don't see it in a few minutes.
                     </p>
-                    <button
-                      onClick={() => setIsOpen(false)}
-                      className="mt-6 rounded-lg bg-[#FF5722] px-6 py-2.5 text-sm font-bold text-slate-900 transition-all duration-200 hover:bg-[#FF6F3D]"
-                    >
-                      Done
-                    </button>
+
+                    {/* CTA Button */}
+                    <div className="pt-4">
+                      <button
+                        onClick={() => setIsOpen(false)}
+                        className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-slate-900 text-white text-sm font-semibold transition-all hover:bg-slate-800 active:scale-95"
+                      >
+                        Done
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}

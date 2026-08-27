@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { prefetchRoute } from "@/lib/route-prefetch";
 
 export function Section({
   children,
@@ -54,7 +55,12 @@ export function CTAButton({
       ? "bg-accent text-accent-foreground shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:scale-105 hover:bg-accent/90"
       : "border-2 border-border-strong text-foreground hover:bg-surface-elevated hover:border-foreground/40 hover:scale-105";
   return (
-    <Link to={to} className={`${base} ${styles} ${classes}`}>
+    <Link
+      to={to}
+      onMouseEnter={() => prefetchRoute(to)}
+      onTouchStart={() => prefetchRoute(to)}
+      className={`${base} ${styles} ${classes}`}
+    >
       {children}
       <span className="transition-transform group-hover:translate-x-1">→</span>
     </Link>

@@ -1,15 +1,116 @@
-# RareRoles Robots.txt
-# Allow all search engines to crawl the site
+# RareRoles Technologies - Robots.txt
+# Last Updated: 2026-08-26
+# Optimized for search engines and AI crawlers
 
+# ===================================
+# DEFAULT CRAWLERS (Google, Bing, etc.)
+# ===================================
 User-agent: *
 Allow: /
-
-# Block admin routes from indexing
 Disallow: /admin/
 Disallow: /admin
-
-# Sitemap location
-Sitemap: https://rareroles.com/sitemap.xml
-
-# Crawl delay (optional - helps prevent server overload)
+Disallow: *.json$
+Disallow: /api/
 Crawl-delay: 1
+
+# ===================================
+# AI CRAWLERS - ChatGPT/OpenAI
+# ===================================
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+
+# ===================================
+# AI CRAWLERS - Google Gemini/Bard
+# ===================================
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+
+# ===================================
+# AI CRAWLERS - Anthropic Claude
+# ===================================
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin/
+
+# ===================================
+# AI CRAWLERS - Common Crawl
+# ===================================
+User-agent: CCBot
+Allow: /
+Disallow: /admin/
+
+# ===================================
+# AI CRAWLERS - Meta/Facebook
+# ===================================
+User-agent: FacebookBot
+Allow: /
+Disallow: /admin/
+
+User-agent: facebookexternalhit
+Allow: /
+
+# ===================================
+# AI CRAWLERS - Apple Intelligence
+# ===================================
+User-agent: Applebot
+Allow: /
+Disallow: /admin/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+
+# ===================================
+# AI CRAWLERS - Perplexity
+# ===================================
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+
+# ===================================
+# AI CRAWLERS - Other AI Services
+# ===================================
+User-agent: Omgilibot
+Allow: /
+Disallow: /admin/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin/
+
+# ===================================
+# SOCIAL MEDIA CRAWLERS
+# ===================================
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# ===================================
+# SITEMAPS & DISCOVERY FILES
+# ===================================
+Sitemap: https://rarerolestechnologies.com/sitemap.xml
+
+# AI crawler discovery
+# See: https://rarerolestechnologies.com/ai.txt
+
+# Human-readable info
+# See: https://rarerolestechnologies.com/humans.txt
+
+# Security contact
+# See: https://rarerolestechnologies.com/.well-known/security.txt

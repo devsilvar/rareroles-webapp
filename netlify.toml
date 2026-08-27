@@ -6,6 +6,11 @@
   # Directory to publish (Vite default)
   publish = "dist"
 
+[build.environment]
+  NPM_FLAGS = "--include=dev"
+  # Required for Puppeteer to run in Netlify's environment
+  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "false"
+
 # SPA routing - redirect all requests to index.html
 [[redirects]]
   from = "/*"

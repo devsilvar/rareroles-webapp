@@ -137,18 +137,18 @@ export default function Companies() {
       structuredDataSchemas.service,
       {
         "@type": "WebPage",
-        "@id": "https://rareroles.com/companies#webpage",
-        url: "https://rareroles.com/companies",
+        "@id": "https://rarerolestechnologies.com/companies#webpage",
+        url: "https://rarerolestechnologies.com/companies",
         name: "Enterprise Technical Recruitment Services for Companies",
         description:
           "Specialized technical recruitment services including talent outsourcing, contract placements, permanent hiring, and executive search. Access pre-vetted enterprise technology talent with faster time-to-hire and reduced hiring risk.",
         isPartOf: {
-          "@id": "https://rareroles.com/#website",
+          "@id": "https://rarerolestechnologies.com/#website",
         },
       },
       structuredDataSchemas.breadcrumbList([
-        { name: "Home", url: "https://rareroles.com/" },
-        { name: "For Companies", url: "https://rareroles.com/companies" },
+        { name: "Home", url: "https://rarerolestechnologies.com/" },
+        { name: "For Companies", url: "https://rarerolestechnologies.com/companies" },
       ]),
     ],
   };
@@ -160,7 +160,7 @@ export default function Companies() {
         description="Specialized technical recruitment services including talent outsourcing, contract placements, permanent hiring, and executive search. Access pre-vetted enterprise technology talent with faster time-to-hire and reduced hiring risk."
         keywords="technical recruitment services, talent outsourcing, contract placements, permanent hiring, executive search, C-suite recruitment, enterprise hiring, tech talent acquisition, recruitment process outsourcing, RPO services, fintech recruitment, banking tech recruitment, telecom recruitment"
         structuredData={structuredData}
-        canonical="https://rareroles.com/companies"
+        canonical="https://rarerolestechnologies.com/companies"
       />
       {/* HERO with background image */}
       <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24">
@@ -173,9 +173,9 @@ export default function Companies() {
             priority={true}
             className="h-full w-full object-cover"
           />
-          {/* Layered overlays keep the copy readable over the photo */}
-          <div className="absolute inset-0 bg-gradient-to-br from-ink/92 via-ink/80 to-brand-purple/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+          {/* Layered overlays - Dark purple brand tint like homepage */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a0b2e]/70 via-[#2d1b4e]/60 to-[#4a1d6f]/50" />
           {/* Subtle dot texture for depth */}
           <div
             className="absolute inset-0 opacity-[0.04]"
@@ -189,30 +189,30 @@ export default function Companies() {
         <div className="container-page relative z-10">
           <div className="max-w-4xl">
             <Eyebrow className="[&>span]:text-white/90 [&>div]:to-white/60">Our services</Eyebrow>
-            <h1 className="text-display mt-6 text-5xl text-white md:text-7xl lg:text-[88px] drop-shadow-2xl">
+            <h1 className="text-display mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[88px] text-white drop-shadow-2xl">
               Specialized Talent Solutions
             </h1>
-            <p className="mt-8 max-w-2xl text-lg text-white/90 md:text-xl drop-shadow-lg">
+            <p className="mt-4 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl text-white/90 drop-shadow-lg">
               From contract placements to executive search — flexible hiring solutions for every
               need
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3">
               <button
                 type="button"
                 onClick={() => openGetStarted()}
-                className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-display text-sm font-bold tracking-tight text-accent-foreground shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-display text-sm font-bold tracking-tight text-accent-foreground shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
               >
                 Get Started
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </button>
               <button
                 onClick={scrollToRoles}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/30 px-6 py-3 text-base font-bold text-white shadow-lg transition-all duration-300 hover:bg-white/20 hover:border-white/50 hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/30 px-6 py-3 text-sm sm:text-base font-bold text-white shadow-lg transition-all duration-300 hover:bg-white/20 hover:border-white/50 hover:scale-105"
                 style={{ fontFamily: "Montserrat, sans-serif" }}
               >
                 See Our Roles
                 <svg
-                  className="h-5 w-5"
+                  className="h-4 w-4 sm:h-5 sm:w-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -229,13 +229,13 @@ export default function Companies() {
       {/* OUR SERVICES — PREMIUM MODAL CARDS WITH BRAND COLORS */}
       <Section className="border-t border-border">
         {/* Header - centered */}
-        <div className="mx-auto max-w-3xl mb-16">
+        <div className="mx-auto max-w-3xl mb-12 sm:mb-16">
           <div className="flex flex-col items-center text-center">
             <Eyebrow>Our services</Eyebrow>
-            <h2 className="text-display mt-6 text-4xl text-foreground md:text-5xl lg:text-6xl">
+            <h2 className="text-display mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground">
               Five ways to work with us.
             </h2>
-            <p className="mt-6 text-lg text-ink-muted md:text-xl">
+            <p className="mt-4 sm:mt-6 text-base sm:text-lg text-ink-muted md:text-xl max-w-2xl">
               Click any card to learn more about our flexible hiring solutions.
             </p>
           </div>
@@ -244,7 +244,7 @@ export default function Companies() {
         {/* Premium Card Grid - 5 cards (3 top row, 2 centered bottom row) */}
         <div className="mx-auto max-w-7xl">
           {/* First Row - 3 cards */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-6 sm:mb-8">
             {services.slice(0, 3).map((s, index) => (
               <button
                 key={s.title}
@@ -254,10 +254,8 @@ export default function Companies() {
                 }}
                 className="group relative text-left w-full"
               >
-                {/* Outer frame - Brand Pink Accent Only */}
-                {/* <div className="relative overflow-hidden rounded-2xl  p-6 shadow-2xl transition-all duration-500 hover:shadow-accent/50  hover:-translate-y-2 cursor-pointer animate-gradient-slow"> */}
                 {/* Inner dark card */}
-                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 min-h-[380px] flex flex-col">
+                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-5 sm:p-6 md:p-8 min-h-[280px] sm:min-h-[340px] md:min-h-[380px] flex flex-col">
                   {/* Animated gradient orbs - Brand Pink Only */}
                   <div className="absolute -left-12 -top-12 h-32 w-32 bg-gradient-to-br from-accent/40 via-pink-500/30 to-transparent rounded-full blur-2xl animate-pulse" />
                   <div
@@ -282,10 +280,10 @@ export default function Companies() {
                   </div>
 
                   {/* Badge with checkmark - top center */}
-                  <div className="relative flex justify-center mb-6">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-white to-pink-100 shadow-xl shadow-accent/30">
+                  <div className="relative flex justify-center mb-4 sm:mb-6">
+                    <div className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-gradient-to-br from-white to-pink-100 shadow-xl shadow-accent/30">
                       <svg
-                        className="h-7 w-7 text-accent"
+                        className="h-5 w-5 sm:h-7 sm:w-7 text-accent"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -299,7 +297,7 @@ export default function Companies() {
                   {/* Service Title */}
                   <div className="relative flex-1 flex flex-col justify-center text-center">
                     <h3
-                      className="text-3xl font-black uppercase leading-tight tracking-tight text-transparent bg-clip-text  text-white"
+                      className="text-xl sm:text-2xl md:text-3xl font-black uppercase leading-tight tracking-tight text-white"
                       style={{ fontFamily: "Montserrat, sans-serif" }}
                     >
                       {s.title}
@@ -307,12 +305,12 @@ export default function Companies() {
                   </div>
 
                   {/* Click indicator */}
-                  <div className="relative flex justify-center items-center gap-2 mt-6 pt-4 border-t border-white/10">
-                    <span className="text-xs font-semibold text-white/70 uppercase tracking-wider">
+                  <div className="relative flex justify-center items-center gap-2 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10">
+                    <span className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider">
                       Click to learn more
                     </span>
                     <svg
-                      className="h-4 w-4 text-white/70 transition-transform group-hover:translate-x-1"
+                      className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/70 transition-transform group-hover:translate-x-1"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -330,23 +328,12 @@ export default function Companies() {
                   <div className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-xl" />
                   <div className="absolute inset-0 rounded-xl ring-2 ring-accent/0 group-hover:ring-accent/50 transition-all duration-500" />
                 </div>
-                {/* </div> */}
-
-                {/* Number badge */}
-                {/* <div className="absolute -top-3 -right-3 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-white to-pink-100 shadow-lg border-2 border-accent">
-                  <span
-                    className="text-sm font-black text-accent"
-                    style={{ fontFamily: "Montserrat, sans-serif" }}
-                  >
-                    {index + 1}
-                  </span>
-                </div> */}
               </button>
             ))}
           </div>
 
           {/* Second Row - 2 cards centered */}
-          <div className="grid gap-8 sm:grid-cols-2 max-w-3xl mx-auto">
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto">
             {services.slice(3, 5).map((s) => (
               <button
                 key={s.title}
@@ -357,7 +344,7 @@ export default function Companies() {
                 className="group relative text-left w-full"
               >
                 {/* Inner dark card - same as first row */}
-                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 min-h-[380px] flex flex-col">
+                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-5 sm:p-6 md:p-8 min-h-[280px] sm:min-h-[340px] md:min-h-[380px] flex flex-col">
                   {/* Animated gradient orbs - Brand Pink Only */}
                   <div className="absolute -left-12 -top-12 h-32 w-32 bg-gradient-to-br from-accent/40 via-pink-500/30 to-transparent rounded-full blur-2xl animate-pulse" />
                   <div
@@ -382,10 +369,10 @@ export default function Companies() {
                   </div>
 
                   {/* Badge with checkmark - top center */}
-                  <div className="relative flex justify-center mb-6">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-white to-pink-100 shadow-xl shadow-accent/30">
+                  <div className="relative flex justify-center mb-4 sm:mb-6">
+                    <div className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-gradient-to-br from-white to-pink-100 shadow-xl shadow-accent/30">
                       <svg
-                        className="h-7 w-7 text-accent"
+                        className="h-5 w-5 sm:h-7 sm:w-7 text-accent"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -399,7 +386,7 @@ export default function Companies() {
                   {/* Service Title */}
                   <div className="relative flex-1 flex flex-col justify-center text-center">
                     <h3
-                      className="text-3xl font-black uppercase leading-tight tracking-tight text-transparent bg-clip-text  text-white"
+                      className="text-xl sm:text-2xl md:text-3xl font-black uppercase leading-tight tracking-tight text-white"
                       style={{ fontFamily: "Montserrat, sans-serif" }}
                     >
                       {s.title}
@@ -407,12 +394,12 @@ export default function Companies() {
                   </div>
 
                   {/* Click indicator */}
-                  <div className="relative flex justify-center items-center gap-2 mt-6 pt-4 border-t border-white/10">
-                    <span className="text-xs font-semibold text-white/70 uppercase tracking-wider">
+                  <div className="relative flex justify-center items-center gap-2 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10">
+                    <span className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider">
                       Click to learn more
                     </span>
                     <svg
-                      className="h-4 w-4 text-white/70 transition-transform group-hover:translate-x-1"
+                      className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/70 transition-transform group-hover:translate-x-1"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -470,15 +457,15 @@ export default function Companies() {
           {frontierRoles.map((r, index) => {
             // Professional images of Black professionals in tech roles - mapped to specific roles
             const roleImages = [
-              oraclePlsqlImg,        // Oracle PL/SQL Developers
-              networkEngineerImg,     // CCIE Network Engineers
-              aixAdminImg,            // AIX System Administrators
-              sharepointImg,          // SharePoint Engineers
-              aiMlEngineersImg,       // AI / Machine Learning Engineers
-              aiAutomationImg,        // AI Automation Engineers
-              solutionArchitectImg,   // Solution Architects
-              aiOperatorsImg,         // AI Operators
-              aiEnabledSoftwareImg,   // AI-Enabled Software Engineers
+              oraclePlsqlImg, // Oracle PL/SQL Developers
+              networkEngineerImg, // CCIE Network Engineers
+              aixAdminImg, // AIX System Administrators
+              sharepointImg, // SharePoint Engineers
+              aiMlEngineersImg, // AI / Machine Learning Engineers
+              aiAutomationImg, // AI Automation Engineers
+              solutionArchitectImg, // Solution Architects
+              aiOperatorsImg, // AI Operators
+              aiEnabledSoftwareImg, // AI-Enabled Software Engineers
             ];
 
             return (
@@ -486,8 +473,8 @@ export default function Companies() {
                 key={r.title}
                 className="group relative flex flex-col overflow-hidden rounded-xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
               >
-                {/* Professional Background Image - Larger, better positioned */}
-                <div className="relative h-[420px] overflow-hidden">
+                {/* Professional Background Image - Responsive height */}
+                <div className="relative h-[280px] sm:h-[350px] md:h-[420px] overflow-hidden">
                   <img
                     src={roleImages[index]}
                     alt={`${r.title} professional`}
@@ -500,16 +487,16 @@ export default function Companies() {
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-purple-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* Vetted badge - top right, clean design */}
-                  <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur-sm px-3 py-1.5 shadow-lg">
-                    <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-900">
+                  <div className="absolute right-3 sm:right-4 top-3 sm:top-4 flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur-sm px-2.5 sm:px-3 py-1 sm:py-1.5 shadow-lg">
+                    <div className="h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-900">
                       Vetted
                     </span>
                   </div>
 
                   {/* Number badge - top left, elegant */}
-                  <div className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/80 backdrop-blur-sm border border-white/20 shadow-lg">
-                    <span className="font-mono text-sm font-bold tracking-wider text-white">
+                  <div className="absolute left-3 sm:left-4 top-3 sm:top-4 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-slate-900/80 backdrop-blur-sm border border-white/20 shadow-lg">
+                    <span className="font-mono text-xs sm:text-sm font-bold tracking-wider text-white">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -519,7 +506,7 @@ export default function Companies() {
                 <div className="relative flex flex-col bg-white p-4">
                   {/* Role title - prominent */}
                   <h3
-                    className="text-lg font-bold leading-tight tracking-tight text-slate-900 mb-3"
+                    className="text-base sm:text-lg font-bold leading-tight tracking-tight text-slate-900 mb-3"
                     style={{ fontFamily: "Montserrat, sans-serif" }}
                   >
                     {r.title}
@@ -529,7 +516,7 @@ export default function Companies() {
                   <button
                     type="button"
                     onClick={() => openGetStarted("hiring", r.title)}
-                    className="group/btn relative overflow-hidden rounded-full bg-gradient-to-r from-accent via-pink-500 to-accent px-4 py-2.5 text-center text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/30 active:scale-[0.98] animate-gradient-slow"
+                    className="group/btn relative overflow-hidden rounded-full bg-gradient-to-r from-accent via-pink-500 to-accent px-4 py-2.5 text-center text-xs sm:text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/30 active:scale-[0.98] animate-gradient-slow"
                     style={{ backgroundSize: "200% 200%" }}
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
@@ -550,26 +537,31 @@ export default function Companies() {
       <Section className="bg-muted/30 border-y border-border">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <Eyebrow className="flex justify-center">Industries we serve</Eyebrow>
-          <h2 className="text-display mt-6 text-4xl text-foreground md:text-5xl">
+          <h2 className="text-display mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-5xl text-foreground">
             Regulated, technical, and complex.
           </h2>
-          <p className="mt-6 text-base text-ink-muted">
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base text-ink-muted">
             We work best inside industries where the wrong hire is expensive and the right one moves
             the roadmap.
           </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { img: blackpepImg, webp: blackpepImg, name: "Banking", n: "01" },
             { img: fintechImg, webp: fintechWebp, name: "Fintech", n: "02" },
             { img: shakeeImg, webp: shakeeImg, name: "Consulting (Big 4)", n: "03" },
             { img: telecomImg, webp: telecomWebp, name: "Telecom", n: "04" },
-            { img: enterpriseArchitectureImg, webp: enterpriseArchitectureImg, name: "Enterprise Tech", n: "05" },
-          ].map((i, index) => (
+            {
+              img: enterpriseArchitectureImg,
+              webp: enterpriseArchitectureImg,
+              name: "Enterprise Tech",
+              n: "05",
+            },
+          ].map((i) => (
             <div key={i.name} className="group relative">
               <div className="overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                <div className="relative h-64">
+                <div className="relative h-56 sm:h-64">
                   <ResponsiveImage
                     webpSrc={i.webp}
                     fallbackSrc={i.img}
@@ -579,17 +571,17 @@ export default function Companies() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
 
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <div className="mb-2 inline-flex items-center justify-center rounded-full bg-accent/20 backdrop-blur-sm border border-accent/30 px-3 py-1">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                    <div className="mb-2 inline-flex items-center justify-center rounded-full bg-accent/20 backdrop-blur-sm border border-accent/30 px-2.5 sm:px-3 py-0.5 sm:py-1">
                       <span className="text-xs font-bold text-white">{i.n}</span>
                     </div>
                     <h3
-                      className="text-xl font-bold text-white mb-2"
+                      className="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-2"
                       style={{ fontFamily: "Montserrat, sans-serif" }}
                     >
                       {i.name}
                     </h3>
-                    <p className="text-sm text-white/90 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-white/90 leading-relaxed">
                       Expert talent placement in this sector
                     </p>
                   </div>
@@ -603,21 +595,22 @@ export default function Companies() {
       {/* Service Detail Modal */}
       {selectedService && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm"
           onClick={() => setSelectedService(null)}
         >
           <div
-            className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"
+            className="relative bg-white rounded-2xl shadow-2xl w-[calc(100vw-2rem)] max-w-lg mx-auto max-h-[85vh] sm:max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
               type="button"
               onClick={() => setSelectedService(null)}
-              className="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-110"
+              className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all hover:bg-slate-200 hover:scale-110"
+              aria-label="Close modal"
             >
               <svg
-                className="h-4.5 w-4.5"
+                className="h-4 w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -628,7 +621,7 @@ export default function Companies() {
             </button>
 
             {/* Modal Header - Dark brand blue */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-ink via-primary to-accent p-7 rounded-t-2xl">
+            <div className="relative overflow-hidden bg-gradient-to-br from-ink via-primary to-accent p-5 sm:p-6 rounded-t-2xl">
               {/* Animated orbs */}
               <div className="absolute -left-10 -top-10 h-28 w-28 rounded-full bg-white/10 blur-2xl animate-pulse" />
               <div
@@ -637,57 +630,63 @@ export default function Companies() {
               />
 
               <div className="relative">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                    <svg
-                      className="h-5 w-5 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-white/70">
-                      RareRoles
-                    </p>
-                    <h3
-                      className="text-xl font-black leading-tight text-white"
-                      style={{ fontFamily: "Montserrat, sans-serif" }}
-                    >
-                      {selectedService.title}
-                    </h3>
-                  </div>
-                </div>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3.5 py-1.5">
-                  <BoltIcon className="h-3.5 w-3.5 text-white" />
-                  <span
-                    className="text-xs font-semibold text-white"
+                <div className="mb-3 sm:mb-4 pr-6">
+                  <p className="text-[9px] font-semibold uppercase tracking-widest text-white/60 mb-1">
+                    RareRoles Service
+                  </p>
+                  <h3
+                    className="text-xl sm:text-2xl font-black leading-tight text-white mb-1"
                     style={{ fontFamily: "Montserrat, sans-serif" }}
                   >
-                    Best for: {selectedService.bestFor}
-                  </span>
+                    {selectedService.title}
+                  </h3>
+                  {/* Elegant underline accent */}
+                  <div className="flex items-center gap-2 mt-2">
+                    <div className="h-0.5 w-10 bg-white/40" />
+                    <div className="h-1 w-1 rounded-full bg-white/60" />
+                    <div className="h-0.5 flex-1 bg-gradient-to-r from-white/20 to-transparent" />
+                  </div>
+                </div>
+
+                {/* Best For - Elegant Card Style */}
+                <div className="relative overflow-hidden rounded-lg bg-white/10 backdrop-blur-md border border-white/20 p-2.5 sm:p-3">
+                  {/* Subtle gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                  
+                  <div className="relative">
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/50">
+                        Ideal For
+                      </span>
+                      <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
+                    </div>
+                    <p
+                      className="text-xs sm:text-[13px] font-medium leading-snug text-white"
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                    >
+                      {selectedService.bestFor}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Modal Body */}
-            <div className="p-7">
+            <div className="p-5 sm:p-6">
               {/* Description */}
-              <div className="mb-6">
-                <div className="mb-3 flex items-center gap-2">
-                  <div className="h-px w-6 bg-gradient-to-r from-accent to-transparent" />
+              <div className="mb-4 sm:mb-5">
+                <div className="mb-2 sm:mb-3 flex items-center gap-2">
+                  <div className="h-px w-8 bg-gradient-to-r from-accent via-accent/60 to-transparent" />
                   <h4
-                    className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent"
+                    className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent"
                     style={{ fontFamily: "Montserrat, sans-serif" }}
                   >
-                    Overview
+                    Service Overview
                   </h4>
+                  <div className="h-px flex-1 bg-gradient-to-r from-accent/20 to-transparent" />
                 </div>
                 <p
-                  className="text-sm leading-relaxed text-slate-600"
+                  className="text-xs sm:text-[13px] leading-relaxed text-slate-600"
                   style={{ fontFamily: "Montserrat, sans-serif" }}
                 >
                   {selectedService.description}
@@ -695,18 +694,18 @@ export default function Companies() {
               </div>
 
               {/* CTA Button */}
-              <div className="pt-5 border-t border-slate-100">
+              <div className="pt-3 sm:pt-4 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => {
                     setSelectedService(null);
                     openGetStarted("hiring", selectedService.title);
                   }}
-                  className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#E91E63] to-[#C2185B] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                  className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent via-[#E91E63] to-[#C2185B] px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-lg shadow-accent/30 hover:shadow-xl hover:shadow-accent/40 hover:scale-[1.02] transition-all duration-300"
                   style={{ fontFamily: "Montserrat, sans-serif" }}
                 >
                   {selectedService.cta}
-                  <ArrowUpRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </button>
               </div>
             </div>

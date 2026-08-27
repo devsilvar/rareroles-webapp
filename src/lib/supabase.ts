@@ -83,42 +83,31 @@ export async function getAverageResponseTime(): Promise<number> {
 
 /**
  * Save hiring enquiry to Supabase
+ *
+ * No .select() after .insert(): PostgREST would turn that into
+ * INSERT ... RETURNING, and the SELECT policy on these tables is admin-only,
+ * so the read-back is refused as 42501 even though the write succeeded.
  */
 export async function saveHiringEnquiry(data: any) {
-  const { data: result, error } = await supabase
-    .from('hiring_enquiries')
-    .insert([data])
-    .select()
-    .single();
+  const { error } = await supabase.from('hiring_enquiries').insert([data]);
 
   if (error) throw error;
-  return result;
 }
 
 /**
  * Save talent submission to Supabase
  */
 export async function saveTalentSubmission(data: any) {
-  const { data: result, error } = await supabase
-    .from('talent_submissions')
-    .insert([data])
-    .select()
-    .single();
+  const { error } = await supabase.from('talent_submissions').insert([data]);
 
   if (error) throw error;
-  return result;
 }
 
 /**
  * Save contact form to Supabase
  */
 export async function saveContact(data: any) {
-  const { data: result, error } = await supabase
-    .from('contacts')
-    .insert([data])
-    .select()
-    .single();
+  const { error } = await supabase.from('contacts').insert([data]);
 
   if (error) throw error;
-  return result;
 }

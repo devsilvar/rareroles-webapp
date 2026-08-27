@@ -54,7 +54,7 @@ const choices: Choice[] = [
   },
 ];
 
-const HIRING_EMAIL = "hello@rareroles.com";
+const HIRING_EMAIL = "sember@rarerolestechnologies.com";
 const MAX_ROLES = 5;
 
 const FIELD =

@@ -51,10 +51,15 @@ export const sendToGoogleAppsScript = async (
 ): Promise<GoogleAppsScriptResponse> => {
   const config = getGoogleAppsScriptConfig();
 
-  // Skip if not enabled or not configured
+  // A missing URL/secret is a real failure, not a silent pass. Reporting
+  // success here would let the UI confirm a submission that never left the
+  // browser.
   if (!config.enabled) {
-    console.log('[Google Apps Script] Skipped - not enabled or not configured');
-    return { success: true, id: 'skipped' };
+    console.error('[Google Apps Script] Not configured - URL or secret missing');
+    return {
+      success: false,
+      error: 'Google Sheets sync is not configured (missing webhook URL or secret)',
+    };
   }
 
   const { retry = true, maxAttempts = 3 } = options;

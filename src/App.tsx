@@ -1,13 +1,15 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SiteNav } from "./components/site-nav";
 import { SiteFooter } from "./components/site-footer";
 import { ScrollToTop } from "./components/scroll-to-top";
+import { RouteTransitionBar } from "./components/route-transition-bar";
 import { WhatsAppButton } from "./components/whatsapp-button";
 import { GetStartedProvider } from "./components/get-started-modal";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "./components/ui/sonner";
 import MarketingScriptsProvider from "./components/MarketingScriptsProvider";
+import { prefetchCoreRoutesOnIdle } from "./lib/route-prefetch";
 
 // Lazy load all pages for code splitting
 const HomePage = lazy(() => import("./pages/Home"));
@@ -43,9 +45,14 @@ function PageLoader() {
 }
 
 function App() {
+  useEffect(() => {
+    prefetchCoreRoutesOnIdle();
+  }, []);
+
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <RouteTransitionBar />
       <Toaster richColors position="top-right" />
       <GetStartedProvider>
         <Suspense fallback={<PageLoader />}>
